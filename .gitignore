@@ -1,0 +1,5 @@
+node_modules/
+src/Blog/
+src/Image/
+dist
+.idea/
