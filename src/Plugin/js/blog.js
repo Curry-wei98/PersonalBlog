@@ -5,7 +5,7 @@ $("document").ready(function(){
     var article=articleDom.html();
     var arr=article.match(/[^\n]*\n/g);//获取每行
     $.each(arr,function(index,element){
-        arr[index]="<p>"+more(element)+"</p>";//在网页中显示
+        arr[index]="<p>"+more(element)+"　</p>";//在网页中显示
     });
     articleDom.html(arr);
 });
