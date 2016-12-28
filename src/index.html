@@ -4,82 +4,33 @@
     <meta charset="UTF-8">
     <title>Higuaifan</title>
     <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
-    <style>
-        html, body {
-            border: 0;
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #050505;
-        }
-
-        a {
-            color: #dddddd;
-            text-decoration: none;
-        }
-
-        center {
-            height: 100%;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
-            position: absolute;
-        }
-
-        img {
-            width: 100vh;
-        }
-        center{
-            background-size: cover;
-            background: url(/Image/index/higuaifan.gif) no-repeat right;
-        }
-        .middle {
-            flex: 1;
-        }
-
-        .foot {
-            flex-basis: 16px;
-        }
-        #left{
-            display: inline-block;
-            width: 120px;
-            height: calc(100vh - 50px);
-            float: left;
-            margin:50px 0 0 40px;
-        }
-
-        #left>div{
-            height: 120px;
-            width: 120px;
-            display: inline-block;
-        }
-        #left>div:hover{
-            cursor:pointer;
-        }
-
-        #log{
-            background: url("/Image/index/log.png") no-repeat;
-        }
-        #technology{
-            background: url("/Image/index/technology.png") no-repeat;
-        }
-    </style>
+    <link rel="stylesheet" href="/Plugin/css/index.css">
 </head>
 <body>
-<center>
-    <div class="middle">
-        <div id="left">
-            <div id="log" onclick="javascript:window.location.href='/Log/index.html'">
+<div id="main">
+    <div id="body">
+        <div id="top">
+            <ul id="bar">
+                <li onclick="javascript:window.location.href='/Log/index.html'">日志</li>
+                <li>学习笔记</li>
+            </ul>
+        </div>
+        <div id="middle">
+            <div id="logo">
+                <img src="/Image/higuaifan_000.jpg" alt="">
             </div>
-            <div id="technology"></div>
+            <div class="whiteLine"></div>
+            <div id="message">
+                <span id="span-first"></span>
+                <span id="span-last"></span>
+            </div>
+            <div class="whiteLine"></div>
         </div>
     </div>
-    <div class="foot">
+    <div id="foot">
         <a target="_blank"
            href="http://zcainfo.miitbeian.gov.cn/state/outPortal/loginPortal.action">备案号：浙ICP备15017406号</a>
     </div>
-</center>
+</div>
 </body>
 </html>
