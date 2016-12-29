@@ -1,0 +1,176 @@
+$black: #050505;
+
+html, body {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $black;
+  font-family: Verdana, "微软雅黑", "Microsoft YaHei", STXihei, "华文细黑", serif;
+}
+
+a {
+  color: #dddddd;
+  text-decoration: none;
+}
+
+#body {
+  height: calc(100vh - 21px);
+}
+
+#top {
+  height: 20%;
+}
+
+#bar {
+  color: #fff;
+  margin: 0;
+  padding: 0 20px;
+  background-color: #1c1c1c;
+  li {
+    list-style-type: none;
+    display: inline-block;
+    height: 55px;
+    line-height: 55px;
+    padding: 0 20px;
+    &:hover {
+      background-color: #272727;
+      cursor: pointer;
+    }
+  }
+}
+
+#bar-right {
+  float: right;
+}
+
+#middle {
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#logo img {
+  height: 45px;
+  width: 60px;
+}
+
+.whiteLine {
+  height: 3px;
+  width: 27vw;
+  background-color: #fff;
+  margin: 20px 0;
+}
+
+#message {
+  color: #fff;
+  font-size: 6vh;
+  letter-spacing: 20px;
+  span::before {
+    color: #fff;
+    font-size: 3vw;
+  }
+}
+.none {
+  #span-first::before {
+    content: "\"一个从小就梦想可以混吃等死，";
+  }
+  #span-last::before {
+    content: "做超酷的事的人的网站。\"";
+  }
+  #message {
+    span{
+      &:before {
+        letter-spacing: 20px;
+      }
+    }
+  }
+}
+
+.normal {
+  #span-first::before {
+    content: "\"一个从小就梦想可以混吃等死，";
+  }
+  #span-last::before {
+    content: "做超酷的事的人的网站。\"";
+  }
+  #message {
+    span{
+      animation: rotate2 1s;
+      &:before {
+        letter-spacing: 20px;
+      }
+    }
+  }
+}
+
+.notes {
+  #span-first::before {
+    content: "\"只有一个人才能把我和学习分开，";
+  }
+  #span-last::before {
+    content: "她也许是你。\"";
+  }
+  #message {
+    span{
+      animation: rotate 1s;
+      &:before {
+        letter-spacing: 20px;
+      }
+    }
+  }
+}
+
+.daily {
+  #span-first::before {
+    content: "\"大道三千，";
+  }
+  #span-last::before {
+    content: "我只修顺心意。\"";
+  }
+  #message {
+    span{
+      animation: rotate 1s;
+      &:before {
+        letter-spacing: 20px;
+      }
+    }
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotateY(0deg);
+  }
+  30% {
+    transform: rotateY(180deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
+}
+@keyframes rotate2 {
+  0% {
+    transform: rotateY(0deg);
+  }
+  30% {
+    transform: rotateY(180deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
+}
+
+#message > span {
+  display: block;
+  text-align: center;
+}
+
+#foot {
+  height: 21px;
+  text-align: center;
+  background-color: #1c1c1c;
+}
