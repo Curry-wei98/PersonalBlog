@@ -99,7 +99,7 @@ a {
   }
   #message {
     span{
-      animation: rotate2 1s;
+      animation: rotate 1s;
       &:before {
         letter-spacing: 20px;
       }
@@ -116,7 +116,7 @@ a {
   }
   #message {
     span{
-      animation: rotate 1s;
+      animation: rotate2 1s;
       &:before {
         letter-spacing: 20px;
       }
@@ -133,7 +133,7 @@ a {
   }
   #message {
     span{
-      animation: rotate 1s;
+      animation: rotate3 1s;
       &:before {
         letter-spacing: 20px;
       }
@@ -141,7 +141,7 @@ a {
   }
 }
 
-@keyframes rotate {
+@mixin transform180{
   0% {
     transform: rotateY(0deg);
   }
@@ -151,18 +151,18 @@ a {
   100% {
     transform: rotateY(0deg);
   }
+}
+
+@keyframes rotate {
+  @include transform180;
 }
 @keyframes rotate2 {
-  0% {
-    transform: rotateY(0deg);
-  }
-  30% {
-    transform: rotateY(180deg);
-  }
-  100% {
-    transform: rotateY(0deg);
-  }
+  @include transform180;
 }
+@keyframes rotate3 {
+  @include transform180;
+}
+
 
 #message > span {
   display: block;
