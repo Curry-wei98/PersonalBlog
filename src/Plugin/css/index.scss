@@ -99,7 +99,7 @@ a {
   }
   #message {
     span{
-      animation: rotate 1s;
+      animation: rotate2 1s;
       &:before {
         letter-spacing: 20px;
       }
@@ -116,7 +116,7 @@ a {
   }
   #message {
     span{
-      animation: rotate2 1s;
+      animation: rotate 1s;
       &:before {
         letter-spacing: 20px;
       }
@@ -133,7 +133,7 @@ a {
   }
   #message {
     span{
-      animation: rotate3 1s;
+      animation: rotate 1s;
       &:before {
         letter-spacing: 20px;
       }
