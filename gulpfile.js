@@ -1,5 +1,4 @@
 const gulp = require('gulp'),
-    // babel = require('gulp-babel'),
     livereload = require('gulp-livereload'),
     sass = require('gulp-sass'),
     fs = require("fs"),
@@ -22,22 +21,6 @@ gulp.task('copyJs', function () {
         .bundle()
         .on('error',gutil.log)
         .pipe(source('index.js'))
-        .pipe(gulp.dest('dist/Plugin/js/'))
-        .pipe(livereload());
-});
-
-gulp.task('es6', function () {
-    return gulp.src('src/Plugin/js/*.js')
-        .pipe(babel({
-            presets: ['es2015']
-        }))
-        .pipe(browserify({
-            insertGlobals: true,
-            debug: !gulp.env.production
-        }))
-        .on("error", error => {
-            console.log(error);
-        })
         .pipe(gulp.dest('dist/Plugin/js/'))
         .pipe(livereload());
 });

@@ -1,5 +1,5 @@
 $black: #050505;
-$white:#ffffff;
+$white: #ffffff;
 
 html, body {
   border: 0;
@@ -54,10 +54,11 @@ a {
   align-items: center;
 }
 
-.hide{
-  animation:hide 0.5s forwards;
+.hide {
+  animation: hide 0.5s forwards;
 }
-.displayNone{
+
+.displayNone {
   display: none !important;
 }
 
@@ -66,7 +67,7 @@ a {
     opacity: 1;
     height: 50%;
   }
-  100%{
+  100% {
     opacity: 0;
     height: 70%;
   }
@@ -102,13 +103,14 @@ a {
     content: "做超酷的事的人的网站。\"";
   }
   #message {
-    span{
+    span {
       &:before {
         letter-spacing: 20px;
       }
     }
   }
 }
+
 .normal {
   #span-first::before {
     content: "\"一个从小就梦想可以混吃等死，";
@@ -117,7 +119,7 @@ a {
     content: "做超酷的事的人的网站。\"";
   }
   #message {
-    span{
+    span {
       animation: rotate2 1s;
       &:before {
         letter-spacing: 20px;
@@ -125,6 +127,7 @@ a {
     }
   }
 }
+
 .notes {
   #span-first::before {
     content: "\"只有一个人才能把我和学习分开，";
@@ -133,23 +136,7 @@ a {
     content: "她也许是你。\"";
   }
   #message {
-    span{
-      animation: rotate 1s;
-      &:before {
-        letter-spacing: 20px;
-      }
-    }
-  }
-}
-.daily {
-  #span-first::before {
-    content: "\"大道三千，";
-  }
-  #span-last::before {
-    content: "我只修顺心意。\"";
-  }
-  #message {
-    span{
+    span {
       animation: rotate 1s;
       &:before {
         letter-spacing: 20px;
@@ -158,7 +145,24 @@ a {
   }
 }
 
-@mixin transform180{
+.daily {
+  #span-first::before {
+    content: "\"大道三千，";
+  }
+  #span-last::before {
+    content: "我只修顺心意。\"";
+  }
+  #message {
+    span {
+      animation: rotate 1s;
+      &:before {
+        letter-spacing: 20px;
+      }
+    }
+  }
+}
+
+@mixin transform180 {
   0% {
     transform: rotateY(0deg);
   }
@@ -170,16 +174,54 @@ a {
   }
 }
 
+//todo 优化
 @keyframes rotate {
   @include transform180;
 }
+
 @keyframes rotate2 {
   @include transform180;
 }
+
 @keyframes rotate3 {
   @include transform180;
 }
 
+@keyframes rotate360 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate360R {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes rotate360d60 {
+  0% {
+    transform: rotate(-60deg);
+  }
+  100% {
+    transform: rotate(300deg);
+  }
+}
+
+@keyframes rotate360a60 {
+  0% {
+    transform: rotate(60deg);
+  }
+  100% {
+    transform: rotate(420deg);
+  }
+}
 
 #message > span {
   display: block;
@@ -192,10 +234,65 @@ a {
   background-color: #1c1c1c;
 }
 
+@mixin hexagon {
+  content: "";
+  width: 70px;
+  height: 40px;
+  background: $white;
+  display: inline-block;
+  position: absolute;
+}
 
-#notes{
-  h1{
+#notes {
+  margin: auto;
+  width: 80%;
+  .hexagon {
+    width: 70px;
+    height: 40px;
+    background: $white;
+    display: inline-block;
+    animation: rotate360R 0.5s ease-in-out;
+    span {
+      position: absolute;
+      z-index: 10;
+      width: 70px;
+      height: 40px;
+      text-align: center;
+      display: inline-block;
+      line-height: 40px;
+    }
+    &:before {
+      @include hexagon;
+      transform: rotate(60deg);
+    }
+    &:after {
+      @include hexagon;
+      transform: rotate(-60deg);
+
+    }
+    &:hover {
+      cursor: pointer;
+      transform: rotate(0deg);
+      animation: rotate360 0.5s ease-in-out;
+      &:before {
+        transform: rotate(60deg);
+        animation: rotat360a60 0.5s ease-in-out;
+      }
+      &:after {
+        transform: rotate(-60deg);
+        animation: rotat360d60 0.5s ease-in-out;
+      }
+
+    }
+  }
+  #titles{
     color: $white;
-    text-align: center;
+    float: right;
+    span{
+      &:hover{
+        cursor:pointer;
+      }
+    }
   }
 }
+

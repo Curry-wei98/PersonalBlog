@@ -4,3 +4,4 @@ src/Image/
 dist
 .idea/
 src/Log/daily
+src/Plugin/lib

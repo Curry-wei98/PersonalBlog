@@ -1,5 +1,7 @@
 import Tools from "./tools";
 import Route from "./route";
+
+
 var home=document.getElementsByTagName('li')[0];
 var notes=document.getElementsByTagName('li')[1];
 var daily=document.getElementsByTagName('li')[2];
