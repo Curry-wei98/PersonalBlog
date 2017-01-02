@@ -1,7 +1,12 @@
 const gulp = require('gulp'),
-    babel = require('gulp-babel'),
+    // babel = require('gulp-babel'),
     livereload = require('gulp-livereload'),
-    sass = require('gulp-sass');
+    sass = require('gulp-sass'),
+    fs = require("fs"),
+    browserify = require("browserify"),
+    babelify = require("babelify"),
+    source = require('vinyl-source-stream'),
+    gutil = require('gulp-util');
 const src = {
     js: 'src/Plugin/js/*.js',
     css: 'src/Plugin/css/*.scss',
@@ -9,11 +14,30 @@ const src = {
     img: 'src/Image/**/*'
 };
 
+
 gulp.task('copyJs', function () {
+    browserify({debug: true})
+        .transform("babelify", {presets: ["es2015"]})
+        .require("src/Plugin/js/index.js", {entry: true})
+        .bundle()
+        .on('error',gutil.log)
+        .pipe(source('index.js'))
+        .pipe(gulp.dest('dist/Plugin/js/'))
+        .pipe(livereload());
+});
+
+gulp.task('es6', function () {
     return gulp.src('src/Plugin/js/*.js')
         .pipe(babel({
             presets: ['es2015']
         }))
+        .pipe(browserify({
+            insertGlobals: true,
+            debug: !gulp.env.production
+        }))
+        .on("error", error => {
+            console.log(error);
+        })
         .pipe(gulp.dest('dist/Plugin/js/'))
         .pipe(livereload());
 });

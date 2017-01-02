@@ -1,4 +1,5 @@
 $black: #050505;
+$white:#ffffff;
 
 html, body {
   border: 0;
@@ -53,6 +54,24 @@ a {
   align-items: center;
 }
 
+.hide{
+  animation:hide 0.5s forwards;
+}
+.displayNone{
+  display: none !important;
+}
+
+@keyframes hide {
+  0% {
+    opacity: 1;
+    height: 50%;
+  }
+  100%{
+    opacity: 0;
+    height: 70%;
+  }
+}
+
 #logo img {
   height: 45px;
   width: 60px;
@@ -74,6 +93,7 @@ a {
     font-size: 3vw;
   }
 }
+
 .none {
   #span-first::before {
     content: "\"一个从小就梦想可以混吃等死，";
@@ -89,7 +109,6 @@ a {
     }
   }
 }
-
 .normal {
   #span-first::before {
     content: "\"一个从小就梦想可以混吃等死，";
@@ -106,7 +125,6 @@ a {
     }
   }
 }
-
 .notes {
   #span-first::before {
     content: "\"只有一个人才能把我和学习分开，";
@@ -123,7 +141,6 @@ a {
     }
   }
 }
-
 .daily {
   #span-first::before {
     content: "\"大道三千，";
@@ -173,4 +190,12 @@ a {
   height: 21px;
   text-align: center;
   background-color: #1c1c1c;
+}
+
+
+#notes{
+  h1{
+    color: $white;
+    text-align: center;
+  }
 }
