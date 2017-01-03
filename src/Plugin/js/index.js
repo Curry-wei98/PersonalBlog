@@ -15,3 +15,6 @@ tools.hover(notes,"notes");
 tools.hover(daily,"daily");
 tools.homeClick(home);
 tools.changeClick(notes, "tags", "Tags/notes.html");
+tools.changeClick(daily, "tags", "Tags/notes.html");
+
+

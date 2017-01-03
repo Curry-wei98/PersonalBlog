@@ -7,23 +7,23 @@ export default class Tools {
     }
 
     //todo 考虑如何使用toggle优化
-    static removeClass(element, className) {
+    removeClass(element, className) {
         let classList = element.classList;
         classList.remove(className);
     };
 
-    static addClass(element, className) {
+    addClass(element, className) {
         let classList = element.classList;
         if (!classList.contains(className))
             classList.add(className);
     };
 
-    static removeAndAddListener(event, element, fun) {
-        element.removeEventListener(event, fun,false);
+    removeAndAddListener(event, element, fun) {
+        element.removeEventListener(event, fun, false);
         element.addEventListener(event, fun, false);
     }
 
-    static ajaxGet(idName,url){
+    ajaxGet(idName, url) {
         var xmlHttp;
         if (window.XMLHttpRequest) { // 兼容 IE7+, Firefox, Chrome, Opera, Safari
             xmlHttp = new XMLHttpRequest();
@@ -53,58 +53,73 @@ export default class Tools {
                 that.middle.className = "normal";
         };
 
-        Tools.removeAndAddListener("mouseover", element, changeClass);
-        Tools.removeAndAddListener("mouseout", element, turnBack);
+        that.removeAndAddListener("mouseover", element, changeClass);
+        that.removeAndAddListener("mouseout", element, turnBack);
+    };
+
+    animationEndFunctionForMiddle(element, idName, url) {
+        var dataName = element.getAttribute("data-name");
+
+        if(!this.middle.classList.contains("displayNone")){
+            this.addClass(this.middle, "displayNone");
+        }
+        if(this.middle.getAttribute("data-barname") != dataName){
+            this.ajaxGet(idName, url);
+            this.middle.setAttribute("data-barname", dataName);
+        }
+
+
+
+        // if (this.middle.classList.contains("hide") &&
+        //     (!this.middle.classList.contains("displayNone")) &&
+        //     (this.middle.getAttribute("data-barname") != dataName)) {
+        // }
     };
 
     changeClick(element, idName, url) {
         //bar标签点击修改load的工具函数
         var that = this;
+        var clickFunction = function () {
+            document.getElementById(idName).classList.remove("displayNone","hide");
 
-        var  animationEndFunction=function () {
-            if (that.middle.classList.contains("hide")) {
-                Tools.addClass(that.middle, "displayNone");
-                Tools.ajaxGet(idName,url);
+            if(that.middle.classList.contains("displayNone")){//已经点了其他的了
+                that.animationEndFunctionForMiddle(element, idName, url);
+            }else{
+                that.addClass(that.middle, "hide");
+                that.removeAndAddListener("webkitAnimationEnd", that.middle, that.animationEndFunctionForMiddle(element, idName, url));
             }
         };
 
-        var clickFunction=function(){
-            document.getElementById(idName).classList.remove("displayNone");
-            document.getElementById(idName).classList.remove("hide");
-            Tools.removeClass(that.middle, "hide");
-            Tools.removeClass(that.middle, "displayNone");
+        that.removeAndAddListener("click", element, clickFunction);
 
-            Tools.addClass(that.middle, "hide");
+    };
 
-            Tools.removeAndAddListener("webkitAnimationEnd",that.middle,animationEndFunction);
-        };
+    animationEndFunction (tags) {
+        if (tags.classList.contains("hide")) {
+            tags.classList.add("displayNone");
 
-        Tools.removeAndAddListener("click",element,clickFunction);
-
+            this.removeAllClass(this.middle);
+            this.middle.classList.add("normal");
+        }
     };
 
     homeClick(element) {
         var that = this;
-        element.onclick = function () {
+        var clickFunction=function(){
             if (that.middle.classList.contains("hide")) {
                 var tags = document.getElementById("tags");
-                var animationEndFunction=function(){
-                    if (tags.classList.contains("hide")) {
-                        tags.classList.add("displayNone");
-                        that.middle.classList.remove("displayNone");
-                        that.middle.classList.remove("hide");
-                    }
-                };
-
-                Tools.addClass(tags, "hide");
-
-                Tools.removeAndAddListener("webkitAnimationEnd",tags,animationEndFunction);
-
-
+                that.addClass(tags, "hide");
+                that.removeAndAddListener("webkitAnimationEnd", tags, that.animationEndFunction(tags));
             }
-        }
+        };
+        this.removeAndAddListener("click",element,clickFunction);
+
+    }
+
+    removeAllClass(element){
+        element.className="";
     }
 
 };
 
-//todo  整体变优雅一点。。。现在的代码是真的丑
+//todo  整体变优雅一点。。。现在的代码是真的丑..作用域弄清楚！！
