@@ -219,6 +219,9 @@ a {
 }
 
 #notes {
+  &>div{
+    height: 100px;
+  }
   margin: auto;
   width: 80%;
   .hexagon {
@@ -257,7 +260,7 @@ a {
 
     }
   }
-  #titles{
+  .titles{
     color: $white;
     float: right;
     span{
