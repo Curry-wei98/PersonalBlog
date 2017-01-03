@@ -173,54 +173,29 @@ a {
     transform: rotateY(0deg);
   }
 }
-
-//todo 优化
 @keyframes rotate {
   @include transform180;
 }
-
 @keyframes rotate2 {
   @include transform180;
 }
-
 @keyframes rotate3 {
   @include transform180;
 }
 
+@mixin hexRotate($from,$to){
+  0% {
+    transform: rotate($from);
+  }
+  100% {
+    transform: rotate($to);
+  }
+}
 @keyframes rotate360 {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+  @include hexRotate(0deg,360deg);
 }
-
 @keyframes rotate360R {
-  0% {
-    transform: rotate(360deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
-}
-
-@keyframes rotate360d60 {
-  0% {
-    transform: rotate(-60deg);
-  }
-  100% {
-    transform: rotate(300deg);
-  }
-}
-
-@keyframes rotate360a60 {
-  0% {
-    transform: rotate(60deg);
-  }
-  100% {
-    transform: rotate(420deg);
-  }
+  @include hexRotate(360deg,0deg);
 }
 
 #message > span {
@@ -268,7 +243,6 @@ a {
     &:after {
       @include hexagon;
       transform: rotate(-60deg);
-
     }
     &:hover {
       cursor: pointer;
@@ -276,11 +250,9 @@ a {
       animation: rotate360 0.5s ease-in-out;
       &:before {
         transform: rotate(60deg);
-        animation: rotat360a60 0.5s ease-in-out;
       }
       &:after {
         transform: rotate(-60deg);
-        animation: rotat360d60 0.5s ease-in-out;
       }
 
     }
