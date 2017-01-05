@@ -5,7 +5,8 @@ const gulp = require('gulp'),
     browserify = require("browserify"),
     babelify = require("babelify"),
     source = require('vinyl-source-stream'),
-    gutil = require('gulp-util');
+    gutil = require('gulp-util'),
+    fileinclude  = require('gulp-file-include');
 const src = {
     js: 'src/Plugin/js/*.js',
     css: 'src/Plugin/css/*.scss',
@@ -32,8 +33,17 @@ gulp.task('sass', function () {
         .pipe(livereload());
 });
 
+gulp.task('copyRoot',function(){
+    return gulp.src('src/Blog/root/*.html')
+        .pipe(gulp.dest('dist/Blog/root/'))
+});
+
 gulp.task('copyFile', function () {
     return gulp.src('src/**/*.html')
+        .pipe(fileinclude({
+            prefix: '@@',
+            basepath: '@file'
+        }))
         .pipe(gulp.dest('dist/'))
         .pipe(livereload());
 });
@@ -43,7 +53,7 @@ gulp.task('copyImage', function () {
         .pipe(gulp.dest('dist/Image/'));
 });
 
-gulp.task('watch', ['copyJs', 'sass', 'copyFile', 'copyImage'], function () {
+gulp.task('watch', ['copyJs', 'sass','copyRoot', 'copyFile', 'copyImage'], function () {
     livereload.listen();
     gulp.watch(src.js, ['copyJs']);
     gulp.watch(src.css, ['sass']);
