@@ -11,7 +11,8 @@ const src = {
     js: 'src/Plugin/js/*.js',
     css: 'src/Plugin/css/*.scss',
     file: 'src/**/*.html',
-    img: 'src/Image/**/*'
+    img: 'src/Image/**/*',
+    php:'src/php/**/*'
 };
 
 
@@ -38,6 +39,12 @@ gulp.task('copyRoot',function(){
         .pipe(gulp.dest('dist/Blog/root/'))
 });
 
+gulp.task('copyPHP',function(){
+    return gulp.src('src/php/**/*.php')
+        .pipe(gulp.dest('dist/php/'))
+        .pipe(livereload());
+});
+
 gulp.task('copyFile', function () {
     return gulp.src('src/**/*.html')
         .pipe(fileinclude({
@@ -53,11 +60,12 @@ gulp.task('copyImage', function () {
         .pipe(gulp.dest('dist/Image/'));
 });
 
-gulp.task('watch', ['copyJs', 'sass','copyRoot', 'copyFile', 'copyImage'], function () {
+gulp.task('watch', ['copyJs','copyPHP', 'sass','copyRoot', 'copyFile', 'copyImage'], function () {
     livereload.listen();
     gulp.watch(src.js, ['copyJs']);
     gulp.watch(src.css, ['sass']);
     gulp.watch(src.file, ['copyFile']);
+    gulp.watch(src.php,['copyPHP']);
 });
 
 gulp.task('default', ['watch']);

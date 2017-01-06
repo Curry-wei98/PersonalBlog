@@ -5,3 +5,4 @@ dist
 .idea/
 src/Log/daily
 src/Plugin/lib
+src/php/common/config.php
