@@ -58,4 +58,4 @@ var visitor=function(url){
     xmlHttp.open("GET", url, true);
     xmlHttp.send();
 };
-visitor("/php/controller/visitorAdd.php");
+// visitor("/php/controller/visitorAdd.php");
