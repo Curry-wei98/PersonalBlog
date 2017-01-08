@@ -291,12 +291,13 @@ a {
   }
   #left{
     float: left;
-    height: 100%;
-    width: 50%;
+    height: calc(100% - 40px);
+    width: calc(50% - 40px);
+    padding: 20px;
+
     textarea{
-      padding: 20px;
       width: calc(99% - 40px);
-      height: calc(99% - 40px);
+      max-height: calc(99% - 40px);
       color: white;
       background-color: #333;
       border: 0;

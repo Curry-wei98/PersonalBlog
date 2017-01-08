@@ -4,26 +4,87 @@
 
 export default class Edit {
     constructor() {
-        this.input = document.getElementById('input');
-        this.show = document.getElementById('show');
+        this.input = document.getElementById('input0');
+        this.img = document.getElementById('image0');
+        this.show = document.getElementById('show0');
+        this.left = document.getElementById('left');
+        this.right = document.getElementById('right');
+        this.imageIndex=1;
         this.rows = null;
         this.avoidIndex = null;
     }
 
     bind() {
         let that = this;
-        this.input.addEventListener('input', function () {
+        this.left.addEventListener('input', function (element) {//todo 最好每个Input都独立绑定好事件，不要这么复杂，而且这样对客户端压力也大
+
+
+            const textarea=element.path[0];
+            const showId="show"+textarea.id.replace("input","");
+            that.show=document.getElementById(showId);
+            that.input=document.getElementById(textarea.id);
+
             that.show.innerHTML = that.compiler(that.input.value);
-
-            var codes=document.getElementsByTagName("code");
-
-            for(var i=0;i<codes.length;i++){
+            var codes = document.getElementsByTagName("code");
+            for (var i = 0; i < codes.length; i++)
                 hljs.highlightBlock(codes[i]);
+        });
+
+        this.left.addEventListener('keydown',function (event) {
+            let input=that.input;
+            if (event.keyCode == "8"&&input.value.length==0) {
+
+                let id=input.id.replace("input","");
+                if(id>0){
+                    //移除显示图片，跳转到上一个textarea
+                    document.getElementById(input.id).remove();
+                    document.getElementById("show"+id).remove();
+                    document.getElementById("showImage"+id).remove();
+                    id=id-1;
+                    document.getElementById("image"+id).remove();
+                    console.log(id);
+                    that.input=document.getElementById("input"+id);
+                    that.input.focus();
+                }
+
+
             }
+        });
+
+        this.left.addEventListener('paste', function (element) {
+            //复制事件
+            if (element.clipboardData.items[0].type.match("image")) {
+                //如果拷贝了图片
+
+                //显示图片
+                let file = element.clipboardData.items[0].getAsFile();
+                that.img.src = window.URL.createObjectURL(file);
+
+                //设置换行后的Input
+                let newInput=document.createElement('textarea');
+                let newImg=document.createElement('img');
+                newInput.id='input'+that.imageIndex;
+                newImg.id='image'+that.imageIndex;
+                that.left.appendChild(newInput);
+                that.left.appendChild(newImg);
+
+                //左边渲染到右边
+                that.right.innerHTML+='<img id="showImage'+that.imageIndex+'" src="'+that.img.src+'" alt=""><div id="show'+that.imageIndex+'"></div>';
+
+                //事件绑定的迁移
+                that.input = document.getElementById('input'+that.imageIndex);
+                that.img = document.getElementById('image'+that.imageIndex);
+                that.show=document.getElementById('show'+that.imageIndex);
+
+                //标记修改
+                that.imageIndex=that.imageIndex+1;
+
+                //光标自动跳转
+                that.input.focus();
+            }
+        });
 
 
-            //
-        })
     }
 
 
@@ -44,10 +105,10 @@ export default class Edit {
     rowController(row, i) {
         let returnStr = '';
 
-        if(this.avoidIndex!=null&&i<this.avoidIndex){
-            return row+"\n";
-        }else if(i==this.avoidIndex){//todo 业务逻辑没有很好地分离！！！！
-            this.avoidIndex=null;
+        if (this.avoidIndex != null && i < this.avoidIndex) {
+            return row + "\n";
+        } else if (i == this.avoidIndex) {//todo 业务逻辑没有很好地分离！！！！
+            this.avoidIndex = null;
             return "</code></pre>";
         }
 
@@ -99,11 +160,11 @@ export default class Edit {
         if (row.substring(1, 3) == "''" && row.substring(4) < '{' && row.substring(4) > '@') {
             for (var j = i; j < this.rows.length; j++) {
                 if ("'''" == this.rows[j]) {
-                    this.avoidIndex=j;
+                    this.avoidIndex = j;
                     break;
                 }
             }
-            return "<pre><code class='"+row.substring(4)+"'>";
+            return "<pre><code class='" + row.substring(4) + "'>";
         }
 
         return row;
