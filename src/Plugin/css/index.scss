@@ -10,6 +10,9 @@ html, body {
   background-color: $black;
   font-family: Verdana, "微软雅黑", "Microsoft YaHei", STXihei, "华文细黑", serif;
 }
+textarea,input{
+  outline:none;
+}
 
 a {
   color: #dddddd;
@@ -173,17 +176,20 @@ a {
     transform: rotateY(0deg);
   }
 }
+
 @keyframes rotate {
   @include transform180;
 }
+
 @keyframes rotate2 {
   @include transform180;
 }
+
 @keyframes rotate3 {
   @include transform180;
 }
 
-@mixin hexRotate($from,$to){
+@mixin hexRotate($from,$to) {
   0% {
     transform: rotate($from);
   }
@@ -191,11 +197,13 @@ a {
     transform: rotate($to);
   }
 }
+
 @keyframes rotate360 {
-  @include hexRotate(0deg,360deg);
+  @include hexRotate(0deg, 360deg);
 }
+
 @keyframes rotate360R {
-  @include hexRotate(360deg,0deg);
+  @include hexRotate(360deg, 0deg);
 }
 
 #message > span {
@@ -219,7 +227,7 @@ a {
 }
 
 #notes {
-  &>div{
+  & > div {
     height: 100px;
   }
   margin: auto;
@@ -261,16 +269,46 @@ a {
 
     }
   }
-  .titles{
+  .titles {
     display: none;
     color: $white;
     float: right;
-    span{
+    span {
       display: block;
-      &:hover{
-        cursor:pointer;
+      &:hover {
+        cursor: pointer;
       }
     }
   }
 }
 
+#edit {
+  width: 99%;
+  height: 99%;
+  #left, #right {
+    display: inline-block;
+    background-color: #333;
+  }
+  #left{
+    float: left;
+    height: 100%;
+    width: 50%;
+    textarea{
+      padding: 20px;
+      width: calc(99% - 40px);
+      height: calc(99% - 40px);
+      color: white;
+      background-color: #333;
+      border: 0;
+      font-family: Verdana, "微软雅黑", "Microsoft YaHei", STXihei, "华文细黑", serif;
+      resize:none;
+    }
+  }
+  #right{
+    float: right;
+    padding: 20px;
+    width: calc(50% - 40px);
+    height: calc(99% - 40px);
+    color:white;
+  }
+}

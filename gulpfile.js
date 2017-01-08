@@ -8,7 +8,7 @@ const gulp = require('gulp'),
     gutil = require('gulp-util'),
     fileinclude  = require('gulp-file-include');
 const src = {
-    js: 'src/Plugin/js/*.js',
+    js: 'src/Plugin/js/**/*.js',
     css: 'src/Plugin/css/*.scss',
     file: 'src/**/*.html',
     img: 'src/Image/**/*',
@@ -16,13 +16,24 @@ const src = {
 };
 
 
-gulp.task('copyJs', function () {
+gulp.task('copyIndexJs', function () {
     browserify({debug: true})
         .transform("babelify", {presets: ["es2015"]})
         .require("src/Plugin/js/index.js", {entry: true})
         .bundle()
         .on('error',gutil.log)
         .pipe(source('index.js'))
+        .pipe(gulp.dest('dist/Plugin/js/'))
+        .pipe(livereload());
+});
+
+gulp.task('copyEditJs', function () {
+    browserify({debug: true})
+        .transform("babelify", {presets: ["es2015"]})
+        .require("src/Plugin/js/edit.js", {entry: true})
+        .bundle()
+        .on('error',gutil.log)
+        .pipe(source('edit.js'))
         .pipe(gulp.dest('dist/Plugin/js/'))
         .pipe(livereload());
 });
@@ -60,9 +71,10 @@ gulp.task('copyImage', function () {
         .pipe(gulp.dest('dist/Image/'));
 });
 
-gulp.task('watch', ['copyJs','copyPHP', 'sass','copyRoot', 'copyFile', 'copyImage'], function () {
+gulp.task('watch', ['copyIndexJs','copyEditJs','copyPHP', 'sass','copyRoot', 'copyFile', 'copyImage'], function () {
     livereload.listen();
-    gulp.watch(src.js, ['copyJs']);
+    gulp.watch(src.js, ['copyIndexJs']);
+    gulp.watch(src.js, ['copyEditJs']);
     gulp.watch(src.css, ['sass']);
     gulp.watch(src.file, ['copyFile']);
     gulp.watch(src.php,['copyPHP']);

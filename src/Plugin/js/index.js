@@ -1,5 +1,5 @@
-import Tools from "./tools";
-import Route from "./route";
+import Tools from "./class/tools";
+import Route from "./class/route";
 
 
 var home=document.getElementsByTagName('li')[0];
