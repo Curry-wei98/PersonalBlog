@@ -94,7 +94,7 @@ export default class Edit {
         const that = this;
         this.rows = rows;
         rows.forEach(function (row, i) {
-            newStr += that.rowController(row, i);
+            newStr += that.rowController(row.replace("<","&lt;").replace(">","&gt;"), i);
         });
 
 
