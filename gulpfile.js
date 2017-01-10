@@ -25,7 +25,7 @@ gulp.task('copyIndexJs', function () {
         .bundle()
         .on('error',gutil.log)
         .pipe(source('index.js'))
-        .pipe(streamify(uglify()))
+        // .pipe(streamify(uglify()))
         .pipe(gulp.dest('dist/Plugin/js/'))
         .pipe(livereload());
 });
@@ -37,7 +37,7 @@ gulp.task('copyEditJs', function () {
         .bundle()
         .on('error',gutil.log)
         .pipe(source('edit.js'))
-        .pipe(streamify(uglify()))
+        // .pipe(streamify(uglify()))
         .pipe(gulp.dest('dist/Plugin/js/'))
         .pipe(livereload());
 });

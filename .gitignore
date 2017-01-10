@@ -1,5 +1,6 @@
 node_modules/
-src/Blog/
+/src/Blog/*
+!/src/Blog/edit.html
 src/Image/
 dist
 .idea/

@@ -20,7 +20,10 @@ export default class Edit {
 
 
             const textarea=element.path[0];
-            const showId="show"+textarea.id.replace("input","");
+            const showId="show"+textarea.id.replace(/input/g,"");
+            // console.log(textarea.value.split("\n").length*21+"px",textarea.getSt("height"));
+            textarea.style.height=textarea.value.split("\n").length*21+"px";
+
             that.show=document.getElementById(showId);
             that.input=document.getElementById(textarea.id);
 
@@ -34,7 +37,7 @@ export default class Edit {
             let input=that.input;
             if (event.keyCode == "8"&&input.value.length==0) {
 
-                let id=input.id.replace("input","");
+                let id=input.id.replace(/input/g,"");
                 if(id>0){
                     //移除显示图片，跳转到上一个textarea
                     document.getElementById(input.id).remove();
@@ -94,7 +97,7 @@ export default class Edit {
         const that = this;
         this.rows = rows;
         rows.forEach(function (row, i) {
-            newStr += that.rowController(row.replace("<","&lt;").replace(">","&gt;"), i);
+            newStr += that.rowController(row.replace(/&/g,"&amp").replace(/</g,"&lt;").replace(/>/g,"&gt;"), i);
         });
 
 
