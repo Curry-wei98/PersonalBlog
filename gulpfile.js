@@ -1,11 +1,13 @@
 const gulp = require('gulp'),
     livereload = require('gulp-livereload'),
     sass = require('gulp-sass'),
-    fs = require("fs"),
     browserify = require("browserify"),
     babelify = require("babelify"),
     source = require('vinyl-source-stream'),
     gutil = require('gulp-util'),
+    cleanCSS = require('gulp-clean-css'),
+    uglify = require('gulp-uglify'),
+    streamify = require('gulp-streamify'),
     fileinclude  = require('gulp-file-include');
 const src = {
     js: 'src/Plugin/js/**/*.js',
@@ -23,6 +25,7 @@ gulp.task('copyIndexJs', function () {
         .bundle()
         .on('error',gutil.log)
         .pipe(source('index.js'))
+        .pipe(streamify(uglify()))
         .pipe(gulp.dest('dist/Plugin/js/'))
         .pipe(livereload());
 });
@@ -34,6 +37,7 @@ gulp.task('copyEditJs', function () {
         .bundle()
         .on('error',gutil.log)
         .pipe(source('edit.js'))
+        .pipe(streamify(uglify()))
         .pipe(gulp.dest('dist/Plugin/js/'))
         .pipe(livereload());
 });
@@ -41,6 +45,7 @@ gulp.task('copyEditJs', function () {
 gulp.task('sass', function () {
     return gulp.src('src/Plugin/css/*.scss')
         .pipe(sass().on('error', sass.logError))
+        .pipe(cleanCSS())
         .pipe(gulp.dest('dist/Plugin/css'))
         .pipe(livereload());
 });
