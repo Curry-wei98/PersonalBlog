@@ -2,10 +2,10 @@ import Tools from "./class/tools";
 import Route from "./class/route";
 
 
-var home=document.getElementsByTagName('li')[0];
-var notes=document.getElementsByTagName('li')[1];
-var daily=document.getElementsByTagName('li')[2];
-var middle=document.getElementById('middle');
+let home=document.getElementsByTagName('li')[0];
+let notes=document.getElementsByTagName('li')[1];
+let daily=document.getElementsByTagName('li')[2];
+let middle=document.getElementById('middle');
 
 
 
@@ -19,19 +19,19 @@ tools.changeClick(notes, "tags", "Tags/notes.html");
 tools.changeClick(daily, "tags", "Tags/notes.html");
 
 
-var hexagon=document.getElementsByClassName('hexagon');
-var tags=document.getElementById("tags");
+let hexagon=document.getElementsByClassName('hexagon');
+let tags=document.getElementById("tags");
 
 
 tags.addEventListener("click",function(event){
-    var element=event.toElement;
-    var path=event.path;
-    for(var i in path){
-        if(path[i].className=="hexagon"){//事件捕获
-            for(var j in hexagon){
-                if(hexagon[j]==path[i]){
-                    var titles=document.getElementsByClassName("titles");
-                    for(var k=0;k<titles.length;k++){
+    let path=event.path;
+
+    for(let element of path){
+        if(element.className=="hexagon"){//事件捕获
+            for(let j in hexagon){
+                if(hexagon[j]==element){
+                    let titles=document.getElementsByClassName("titles");
+                    for(let k=0;k<titles.length;k++){
                         titles[k].style.display="none";
                     }
                     titles[j].style.display="block";
@@ -39,11 +39,12 @@ tags.addEventListener("click",function(event){
             }
         }
     }
+
 });
 
 
-var visitor=function(url){
-    var xmlHttp;
+let visitor=function(url){
+    let xmlHttp;
     if (window.XMLHttpRequest) { // 兼容 IE7+, Firefox, Chrome, Opera, Safari
         xmlHttp = new XMLHttpRequest();
     }
