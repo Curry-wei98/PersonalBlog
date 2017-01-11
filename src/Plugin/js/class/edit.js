@@ -86,10 +86,7 @@ export default class Edit {
                 that.input.focus();
             }
         });
-
-
     }
-
 
     compiler(str) {
         let newStr = '';
@@ -99,15 +96,11 @@ export default class Edit {
         rows.forEach(function (row, i) {
             newStr += that.rowController(row.replace(/&/g,"&amp").replace(/</g,"&lt;").replace(/>/g,"&gt;"), i);
         });
-
-
         return newStr;
     }
 
 
     rowController(row, i) {
-        let returnStr = '';
-
         if (this.avoidIndex != null && i < this.avoidIndex) {
             return row + "\n";
         } else if (i == this.avoidIndex) {//todo 业务逻辑没有很好地分离！！！！
@@ -126,12 +119,10 @@ export default class Edit {
             default:
                 return row + '<br />';
         }
-        return returnStr;
     }
 
     //首字母为#的情况下
     poundSign(row) {
-
         switch (row[1]) {
             case ' ':
                 return '<h1>' + row.substring(2) + '</h1>';
@@ -154,7 +145,6 @@ export default class Edit {
             default:
                 return row;
         }
-        return;
     }
 
 
@@ -169,7 +159,6 @@ export default class Edit {
             }
             return "<pre><code class='" + row.substring(4) + "'>";
         }
-
         return row;
     }
 
