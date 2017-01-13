@@ -8,6 +8,7 @@ const gulp = require('gulp'),
     cleanCSS = require('gulp-clean-css'),
     uglify = require('gulp-uglify'),
     streamify = require('gulp-streamify'),
+    changed = require('gulp-changed'),
     fileinclude  = require('gulp-file-include');
 const src = {
     js: 'src/Plugin/js/**/*.js',
@@ -63,6 +64,7 @@ gulp.task('copyPHP',function(){
 
 gulp.task('copyFile', function () {
     return gulp.src('src/**/*.html')
+        .pipe(changed('dist/'))
         .pipe(fileinclude({
             prefix: '@@',
             basepath: '@file'
