@@ -165,6 +165,23 @@ a {
   }
 }
 
+.edit {
+  #span-first::before {
+    content: "\"一个充满玩票性质的，";
+  }
+  #span-last::before {
+    content: "辣鸡编辑器。\"";
+  }
+  #message {
+    span {
+      animation: rotate 1s;
+      &:before {
+        letter-spacing: 20px;
+      }
+    }
+  }
+}
+
 @mixin transform180 {
   0% {
     transform: rotateY(0deg);
@@ -188,6 +205,7 @@ a {
 @keyframes rotate3 {
   @include transform180;
 }
+
 
 @mixin hexRotate($from,$to) {
   0% {

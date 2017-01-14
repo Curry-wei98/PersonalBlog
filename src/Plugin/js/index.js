@@ -5,6 +5,7 @@ import Route from "./class/route";
 let home=document.getElementsByTagName('li')[0];
 let notes=document.getElementsByTagName('li')[1];
 let daily=document.getElementsByTagName('li')[2];
+let edit=document.getElementsByTagName('li')[3];
 let middle=document.getElementById('middle');
 
 
@@ -14,6 +15,7 @@ let tools=new Tools(middle);
 let route=new Route();
 tools.hover(notes,"notes");
 tools.hover(daily,"daily");
+tools.hover(edit,"edit");
 tools.homeClick(home);
 tools.changeClick(notes, "tags", "Tags/notes.html");
 tools.changeClick(daily, "tags", "Tags/notes.html");
