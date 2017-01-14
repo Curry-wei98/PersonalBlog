@@ -40,17 +40,29 @@ export default class Tools {
         xmlHttp.send();
     };
 
+    //todo 优化 不显示的时候就不要运行了。  最好么解绑解掉
     hover(element, className) {
         //bar标签的悬浮旋转工具函数
         var that = this;
+        let middle=that.middle;
         var changeClass = function () {
-            if (!(that.middle.classList.contains("displayNone") ||
-                that.middle.classList.contains("hide")))
-                that.middle.className = className;
+            if(middle.classList.contains('middleDown')){
+                middle.className='middleDown';
+            }else{
+                middle.className="";
+            }
+            middle.classList.add(className);
+
+            middle.classList.add(className);
+            middle.classList.remove('normal');
         };
         var turnBack = function () {
-            if (!(that.middle.classList.contains("displayNone") || (that.middle.classList.contains("hide"))))
-                that.middle.className = "normal";
+            if(middle.classList.contains('middleDown')){
+                middle.className='middleDown';
+            }else{
+                middle.className="";
+            }
+            that.middle.classList.add('normal');
         };
 
         that.removeAndAddListener("mouseover", element, changeClass);

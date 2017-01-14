@@ -19,12 +19,15 @@ a {
   text-decoration: none;
 }
 
-#body {
-  height: calc(100vh - 21px);
+#main{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
-
-#top {
-  height: 20%;
+#top{
+  position: relative;
+  z-index: 10;
 }
 
 #bar {
@@ -44,23 +47,100 @@ a {
     }
   }
 }
-
 .bar-right {
   float: right;
 }
 
+#body{
+  height: calc(100vh - 77px);
+  overflow: hidden;
+}
+
+#others{
+  position: relative;
+  z-index: 0;
+  top:-100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #fff;
+  font-size: 40px;
+  text-align: center;
+}
+
 #middle {
-  height: 50%;
+  position: relative;
+  height: 80%;
+  top:-100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+#foot {
+  height: 21px;
+  text-align: center;
+  background-color: #1c1c1c;
+}
+
+.othersDown{
+  top:0 !important;
+  animation: topDown 0.5s forwards;
+}
+.middleDown{
+  top:0 !important;
+  animation: middleDown 0.5s forwards;
+}
+.othersUp{
+  animation: topUp 0.5s forwards;
+}
+.middleUp{
+  animation: middleUp 0.5s forwards;
+}
+
+@keyframes topDown {
+  0%{
+    top:-100%;
+  }
+  100%{
+    top:0 !important;
+  }
+}
+@keyframes topUp {
+  0%{
+    top:0 ;
+  }
+  100%{
+    top:-100%;
+  }
+}
+
+@keyframes middleDown {
+  0%{
+    top:-100%;
+  }
+  100%{
+    top:0 !important;
+  }
+}
+@keyframes middleUp {
+  0%{
+    top:0;
+  }
+  100%{
+    top:-100%;
+  }
+}
+
 .hide {
   animation: hide 0.5s forwards;
 }
 
+//todo 优化：最好能不用!important
 .displayNone {
   display: none !important;
 }
@@ -167,7 +247,7 @@ a {
 
 .edit {
   #span-first::before {
-    content: "\"一个充满玩票性质的，";
+    content: "\"一个宇宙无敌超级跳票的，";
   }
   #span-last::before {
     content: "辣鸡编辑器。\"";
@@ -229,11 +309,12 @@ a {
   text-align: center;
 }
 
-#foot {
-  height: 21px;
-  text-align: center;
-  background-color: #1c1c1c;
-}
+
+
+
+
+
+
 
 @mixin hexagon {
   content: "";

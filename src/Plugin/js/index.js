@@ -7,6 +7,7 @@ let notes=document.getElementsByTagName('li')[1];
 let daily=document.getElementsByTagName('li')[2];
 let edit=document.getElementsByTagName('li')[3];
 let middle=document.getElementById('middle');
+let others=document.getElementById('others');
 
 
 
@@ -16,33 +17,33 @@ let route=new Route();
 tools.hover(notes,"notes");
 tools.hover(daily,"daily");
 tools.hover(edit,"edit");
-tools.homeClick(home);
-tools.changeClick(notes, "tags", "Tags/notes.html");
-tools.changeClick(daily, "tags", "Tags/notes.html");
+// tools.homeClick(home);
+// tools.changeClick(notes, "tags", "Tags/notes.html");
+// tools.changeClick(daily, "tags", "Tags/notes.html");
 
 
 let hexagon=document.getElementsByClassName('hexagon');
 let tags=document.getElementById("tags");
 
 
-tags.addEventListener("click",function(event){
-    let path=event.path;
-
-    for(let element of path){
-        if(element.className=="hexagon"){//事件捕获
-            for(let j in hexagon){
-                if(hexagon[j]==element){
-                    let titles=document.getElementsByClassName("titles");
-                    for(let k=0;k<titles.length;k++){
-                        titles[k].style.display="none";
-                    }
-                    titles[j].style.display="block";
-                }
-            }
-        }
-    }
-
-});
+// tags.addEventListener("click",function(event){
+//     let path=event.path;
+//
+//     for(let element of path){
+//         if(element.className=="hexagon"){//事件捕获
+//             for(let j in hexagon){
+//                 if(hexagon[j]==element){
+//                     let titles=document.getElementsByClassName("titles");
+//                     for(let k=0;k<titles.length;k++){
+//                         titles[k].style.display="none";
+//                     }
+//                     titles[j].style.display="block";
+//                 }
+//             }
+//         }
+//     }
+//
+// });
 
 
 let visitor=function(url){
@@ -62,3 +63,18 @@ let visitor=function(url){
     xmlHttp.send();
 };
 // visitor("/php/controller/visitorAdd.php");
+
+
+notes.addEventListener("click",function(event){
+    tools.removeClass(others,"othersUp");
+    tools.removeClass(middle,"middleUp");
+    tools.addClass(others,"othersDown");
+    tools.addClass(middle,"middleDown");
+});
+
+home.addEventListener("click",function(event){
+    tools.removeClass(others,"othersDown");
+    tools.removeClass(middle,"middleDown");
+    tools.addClass(others,"othersUp");
+    tools.addClass(middle,"middleUp");
+});
