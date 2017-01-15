@@ -10,8 +10,9 @@ html, body {
   background-color: $black;
   font-family: Verdana, "微软雅黑", "Microsoft YaHei", STXihei, "华文细黑", serif;
 }
-textarea,input{
-  outline:none;
+
+textarea, input {
+  outline: none;
 }
 
 a {
@@ -19,13 +20,14 @@ a {
   text-decoration: none;
 }
 
-#main{
+#main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
 }
-#top{
+
+#top {
   position: relative;
   z-index: 10;
 }
@@ -47,19 +49,20 @@ a {
     }
   }
 }
+
 .bar-right {
   float: right;
 }
 
-#body{
+#body {
   height: calc(100vh - 77px);
   overflow: hidden;
 }
 
-#others{
+#others {
   position: relative;
   z-index: 0;
-  top:-100%;
+  top: -100%;
   height: 100%;
 
   display: flex;
@@ -74,7 +77,7 @@ a {
 #middle {
   position: relative;
   height: 80%;
-  top:-100%;
+  top: -100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -87,52 +90,57 @@ a {
   background-color: #1c1c1c;
 }
 
-.othersDown{
-  top:0 !important;
+.othersDown {
+  top: 0 !important;
   animation: topDown 0.5s forwards;
 }
-.middleDown{
-  top:0 !important;
+
+.middleDown {
+  top: 0 !important;
   animation: middleDown 0.5s forwards;
 }
-.othersUp{
+
+.othersUp {
   animation: topUp 0.5s forwards;
 }
-.middleUp{
+
+.middleUp {
   animation: middleUp 0.5s forwards;
 }
 
 @keyframes topDown {
-  0%{
-    top:-100%;
+  0% {
+    top: -100%;
   }
-  100%{
-    top:0 !important;
+  100% {
+    top: 0 !important;
   }
 }
+
 @keyframes topUp {
-  0%{
-    top:0 ;
+  0% {
+    top: 0;
   }
-  100%{
-    top:-100%;
+  100% {
+    top: -100%;
   }
 }
 
 @keyframes middleDown {
-  0%{
-    top:-100%;
+  0% {
+    top: -100%;
   }
-  100%{
-    top:0 !important;
+  100% {
+    top: 0 !important;
   }
 }
+
 @keyframes middleUp {
-  0%{
-    top:0;
+  0% {
+    top: 0;
   }
-  100%{
-    top:-100%;
+  100% {
+    top: -100%;
   }
 }
 
@@ -141,6 +149,7 @@ a {
 }
 
 //todo 优化：最好能不用!important
+//todo 清空不需要的css
 .displayNone {
   display: none !important;
 }
@@ -286,7 +295,6 @@ a {
   @include transform180;
 }
 
-
 @mixin hexRotate($from,$to) {
   0% {
     transform: rotate($from);
@@ -309,13 +317,6 @@ a {
   text-align: center;
 }
 
-
-
-
-
-
-
-
 @mixin hexagon {
   content: "";
   width: 70px;
@@ -325,13 +326,26 @@ a {
   position: absolute;
 }
 
+#links{
+  padding-top: 50px;
+  font-size: 20px;
+  span{
+    display: block;
+  }
+}
 #notes {
   & > div {
     height: 100px;
+    display: inline-block;
+    width: 70px;
+    margin: 20px;
+    float: left;
   }
   margin: auto;
   width: 80%;
+  display: block;
   .hexagon {
+    position: absolute;
     width: 70px;
     height: 40px;
     background: $white;
@@ -346,13 +360,17 @@ a {
       display: inline-block;
       line-height: 40px;
       font-size: 12px;
+      color: #000;
+      left: 0;
     }
     &:before {
       @include hexagon;
+      left: 0;
       transform: rotate(60deg);
     }
     &:after {
       @include hexagon;
+      left: 0;
       transform: rotate(-60deg);
     }
     &:hover {
@@ -388,27 +406,27 @@ a {
     display: inline-block;
     background-color: #333;
   }
-  #left{
+  #left {
     float: left;
     height: calc(100% - 40px);
     width: calc(50% - 40px);
     padding: 20px;
 
-    textarea{
+    textarea {
       width: calc(99% - 40px);
       max-height: calc(99% - 40px);
       color: white;
       background-color: #333;
       border: 0;
       font-family: Verdana, "微软雅黑", "Microsoft YaHei", STXihei, "华文细黑", serif;
-      resize:none;
+      resize: none;
     }
   }
-  #right{
+  #right {
     float: right;
     padding: 20px;
     width: calc(50% - 40px);
     height: calc(99% - 40px);
-    color:white;
+    color: white;
   }
 }

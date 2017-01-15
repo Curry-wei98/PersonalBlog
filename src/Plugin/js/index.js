@@ -18,32 +18,27 @@ tools.hover(notes,"notes");
 tools.hover(daily,"daily");
 tools.hover(edit,"edit");
 // tools.homeClick(home);
-// tools.changeClick(notes, "tags", "Tags/notes.html");
+tools.load(notes, "others", "Tags/notes.html");
 // tools.changeClick(daily, "tags", "Tags/notes.html");
 
 
 let hexagon=document.getElementsByClassName('hexagon');
-let tags=document.getElementById("tags");
 
 
-// tags.addEventListener("click",function(event){
-//     let path=event.path;
-//
-//     for(let element of path){
-//         if(element.className=="hexagon"){//事件捕获
-//             for(let j in hexagon){
-//                 if(hexagon[j]==element){
-//                     let titles=document.getElementsByClassName("titles");
-//                     for(let k=0;k<titles.length;k++){
-//                         titles[k].style.display="none";
-//                     }
-//                     titles[j].style.display="block";
-//                 }
-//             }
-//         }
-//     }
-//
-// });
+others.addEventListener("click",function(event){
+    let path=event.path;
+    for(let element of path){
+        if(element.className=="hexagon"){//事件捕获
+            for(let j in hexagon){
+                if(hexagon[j]==element){
+                    let name=element.getAttribute('data-name');
+                    console.log(name);
+                }
+            }
+        }
+    }
+
+});
 
 
 let visitor=function(url){

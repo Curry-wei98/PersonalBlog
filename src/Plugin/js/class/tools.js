@@ -71,7 +71,6 @@ export default class Tools {
 
     animationEndFunctionForMiddle(element, idName, url) {
         var dataName = element.getAttribute("data-name");
-
         if(!this.middle.classList.contains("displayNone")){
             this.addClass(this.middle, "displayNone");
         }
@@ -79,13 +78,6 @@ export default class Tools {
             this.ajaxGet(idName, url);
             this.middle.setAttribute("data-barname", dataName);
         }
-
-
-
-        // if (this.middle.classList.contains("hide") &&
-        //     (!this.middle.classList.contains("displayNone")) &&
-        //     (this.middle.getAttribute("data-barname") != dataName)) {
-        // }
     };
 
     changeClick(element, idName, url) {
@@ -105,6 +97,15 @@ export default class Tools {
         that.removeAndAddListener("click", element, clickFunction);
 
     };
+
+
+    load(element,idName,url){
+        var that = this;
+        var clickFunction = function () {
+            that.ajaxGet(idName,url);
+        };
+        that.removeAndAddListener("click", element, clickFunction);
+    }
 
     animationEndFunction (tags) {
         if (tags.classList.contains("hide")) {
