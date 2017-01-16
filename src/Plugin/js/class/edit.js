@@ -12,17 +12,46 @@ export default class Edit {
         this.imageIndex=1;
         this.rows = null;
         this.avoidIndex = null;
+        this.pasteFlag=false;
     }
 
     bind() {
         let that = this;
+        let lastShow=null;
         this.left.addEventListener('input', function (element) {//todo 最好每个Input都独立绑定好事件，不要这么复杂，而且这样对客户端压力也大
-
-
             const textarea=element.path[0];
             const showId="show"+textarea.id.replace(/input/g,"");
-            // console.log(textarea.value.split("\n").length*21+"px",textarea.getSt("height"));
             textarea.style.height=textarea.value.split("\n").length*21+"px";
+            if(this.pasteFlag==true){
+                this.pasteFlag=false;
+                lastShow=that.show;
+                //设置换行后的Input
+                let newInput=document.createElement('textarea');
+                let newImg=document.createElement('img');
+                let newShow=document.createElement('show');
+                newInput.id='input'+that.imageIndex;
+                newImg.id='image'+that.imageIndex;
+                newShow.id='show'+that.imageIndex;
+                that.left.appendChild(newInput);
+                that.left.appendChild(newImg);
+                that.right.appendChild(newShow);
+
+                //事件绑定的迁移
+                that.input = document.getElementById('input'+that.imageIndex);
+                that.img = document.getElementById('image'+that.imageIndex);
+                that.show=document.getElementById('show'+that.imageIndex);
+
+                //标记修改
+                that.imageIndex=that.imageIndex+1;
+
+                //光标自动跳转
+                that.input.focus();
+                return;
+            }
+
+
+
+
 
             that.show=document.getElementById(showId);
             that.input=document.getElementById(textarea.id);
@@ -40,12 +69,13 @@ export default class Edit {
                 let id=input.id.replace(/input/g,"");
                 if(id>0){
                     //移除显示图片，跳转到上一个textarea
+                    //todo 做上一个是div的判断
+
                     document.getElementById(input.id).remove();
                     document.getElementById("show"+id).remove();
                     document.getElementById("showImage"+id).remove();
                     id=id-1;
                     document.getElementById("image"+id).remove();
-                    console.log(id);
                     that.input=document.getElementById("input"+id);
                     that.input.focus();
                 }
@@ -56,6 +86,7 @@ export default class Edit {
 
         this.left.addEventListener('paste', function (element) {
             //复制事件
+            this.pasteFlag=true;
             if (element.clipboardData.items[0].type.match("image")) {
                 //如果拷贝了图片
 
@@ -72,6 +103,7 @@ export default class Edit {
                 that.left.appendChild(newImg);
 
                 //左边渲染到右边
+                //todo 不要写这么反人类的add dom的代码！！
                 that.right.innerHTML+='<img id="showImage'+that.imageIndex+'" src="'+that.img.src+'" alt=""><div id="show'+that.imageIndex+'"></div>';
 
                 //事件绑定的迁移
@@ -84,6 +116,16 @@ export default class Edit {
 
                 //光标自动跳转
                 that.input.focus();
+            }
+
+            if(element.clipboardData.items[1]!=undefined&&element.clipboardData.items[1].type.match("html")){
+                // 如果是粘贴富文本内容
+                element.clipboardData.items[1].getAsString(function (data) {
+                    //粘贴富文本内容
+                    //在冒泡事件结束后才触发
+                    lastShow.innerHTML+=data;
+                });
+
             }
         });
     }
