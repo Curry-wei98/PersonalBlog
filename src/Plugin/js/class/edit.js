@@ -28,10 +28,11 @@ export default class Edit {
                 //设置换行后的Input
                 let newInput=document.createElement('textarea');
                 let newImg=document.createElement('img');
-                let newShow=document.createElement('show');
+                let newShow=document.createElement('div');
                 newInput.id='input'+that.imageIndex;
                 newImg.id='image'+that.imageIndex;
                 newShow.id='show'+that.imageIndex;
+                newShow.className="show";
                 that.left.appendChild(newInput);
                 that.left.appendChild(newImg);
                 that.right.appendChild(newShow);
@@ -65,19 +66,55 @@ export default class Edit {
         this.left.addEventListener('keydown',function (event) {
             let input=that.input;
             if (event.keyCode == "8"&&input.value.length==0) {
+                //回撤事件
 
-                let id=input.id.replace(/input/g,"");
+                let textArea=event.path[0];
+                let id=textArea.id.replace(/input/g,"");
                 if(id>0){
                     //移除显示图片，跳转到上一个textarea
-                    //todo 做上一个是div的判断
 
-                    document.getElementById(input.id).remove();
-                    document.getElementById("show"+id).remove();
-                    document.getElementById("showImage"+id).remove();
-                    id=id-1;
-                    document.getElementById("image"+id).remove();
-                    that.input=document.getElementById("input"+id);
-                    that.input.focus();
+                    let prevImg=textArea.previousElementSibling;
+                    let nextImg=textArea.nextElementSibling;
+                    let prevTextArea=prevImg.previousElementSibling;
+                    let textAreaArray=document.getElementsByTagName('textarea');
+                    let showArray=document.getElementsByClassName("show");
+
+                    for(let t in textAreaArray){
+                        if(textAreaArray[t]==textArea){
+                            //这里获得index
+                            nextImg.remove();
+
+                            let imageUrl=prevImg.getAttribute("src");
+
+                            if(imageUrl!=""){
+                                showArray[t].previousElementSibling.remove();
+                            }
+
+                            prevImg.setAttribute("src","");
+                            textArea.remove();
+                            prevTextArea.focus();
+                            showArray[t].remove();
+
+                        }
+                    }
+
+
+
+
+
+                    //移除input 移除image
+
+                    // document.getElementById(input.id).remove();
+                    // document.getElementById("show"+id).remove();
+                    // try{
+                    //     document.getElementById("showImage"+id).remove();
+                    // }catch (e){
+                    //     console.warn('no show image');
+                    // }
+                    // id=id-1;
+                    // document.getElementById("image"+id).remove();
+                    // that.input=document.getElementById("input"+id);
+                    // that.input.focus();
                 }
 
 
@@ -86,13 +123,13 @@ export default class Edit {
 
         this.left.addEventListener('paste', function (element) {
             //复制事件
-            this.pasteFlag=true;
             if (element.clipboardData.items[0].type.match("image")) {
                 //如果拷贝了图片
-
+                let textArea=element.path[0];
+                let nextImg=textArea.nextElementSibling;
                 //显示图片
                 let file = element.clipboardData.items[0].getAsFile();
-                that.img.src = window.URL.createObjectURL(file);
+                nextImg.src = window.URL.createObjectURL(file);
 
                 //设置换行后的Input
                 let newInput=document.createElement('textarea');
@@ -104,7 +141,7 @@ export default class Edit {
 
                 //左边渲染到右边
                 //todo 不要写这么反人类的add dom的代码！！
-                that.right.innerHTML+='<img id="showImage'+that.imageIndex+'" src="'+that.img.src+'" alt=""><div id="show'+that.imageIndex+'"></div>';
+                that.right.innerHTML+='<img class="showImg" id="showImage'+that.imageIndex+'" src="'+that.img.src+'" alt=""><div class="show" id="show'+that.imageIndex+'"></div>';
 
                 //事件绑定的迁移
                 that.input = document.getElementById('input'+that.imageIndex);
@@ -119,6 +156,7 @@ export default class Edit {
             }
 
             if(element.clipboardData.items[1]!=undefined&&element.clipboardData.items[1].type.match("html")){
+                this.pasteFlag=true;
                 // 如果是粘贴富文本内容
                 element.clipboardData.items[1].getAsString(function (data) {
                     //粘贴富文本内容
@@ -209,3 +247,6 @@ export default class Edit {
 
 //todo 使用selectionStart有没有办法减少渲染
 //todo '''暂时无法显示
+//todo 有必要再添加img dom
+//todo 整理粘贴模块的代码
+//todo 2017/1/18 明天修复that.show的丑陋代码！！
