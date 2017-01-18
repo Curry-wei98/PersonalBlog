@@ -249,4 +249,4 @@ export default class Edit {
 //todo '''暂时无法显示
 //todo 有必要再添加img dom
 //todo 整理粘贴模块的代码
-//todo 2017/1/18 明天修复that.show的丑陋代码！！
+//todo 2017/1/18 重构！！

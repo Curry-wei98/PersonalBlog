@@ -1,5 +1,7 @@
 $black: #050505;
-$white: #ffffff;
+$white: #fff;
+$red:#a82533;
+$lightRed:#BF2435;
 
 html, body {
   border: 0;
@@ -7,7 +9,8 @@ html, body {
   padding: 0;
   width: 100%;
   height: 100%;
-  background-color: $black;
+
+  background-color: $white;
   font-family: Verdana, "微软雅黑", "Microsoft YaHei", STXihei, "华文细黑", serif;
 }
 
@@ -16,7 +19,7 @@ textarea, input {
 }
 
 a {
-  color: #dddddd;
+  color: $white;
   text-decoration: none;
 }
 
@@ -33,10 +36,10 @@ a {
 }
 
 #bar {
-  color: #fff;
+  color: $white;
   margin: 0;
   padding: 0 20px;
-  background-color: #1c1c1c;
+  background-color: #a82533;
   li {
     list-style-type: none;
     display: inline-block;
@@ -44,7 +47,7 @@ a {
     line-height: 55px;
     padding: 0 20px;
     &:hover {
-      background-color: #272727;
+      background-color: $lightRed;
       cursor: pointer;
     }
   }
@@ -69,7 +72,7 @@ a {
   flex-direction: column;
   justify-content: center;
 
-  color: #fff;
+  color: $black;
   font-size: 40px;
   text-align: center;
 }
@@ -87,7 +90,7 @@ a {
 #foot {
   height: 21px;
   text-align: center;
-  background-color: #1c1c1c;
+  background-color: $red;
 }
 
 .othersDown {
@@ -173,16 +176,16 @@ a {
 .whiteLine {
   height: 3px;
   width: 27vw;
-  background-color: #fff;
+  background-color: $black;
   margin: 20px 0;
 }
 
 #message {
-  color: #fff;
+  color: $white;
   font-size: 6vh;
   letter-spacing: 20px;
   span::before {
-    color: #fff;
+    color: $black;
     font-size: 3vw;
   }
 }
@@ -256,10 +259,10 @@ a {
 
 .edit {
   #span-first::before {
-    content: "\"一个宇宙无敌超级跳票的，";
+    content: "\"一个宇宙无敌超级辣鸡的，";
   }
   #span-last::before {
-    content: "辣鸡编辑器。\"";
+    content: "跳票编辑器。\"";
   }
   #message {
     span {
@@ -321,7 +324,7 @@ a {
   content: "";
   width: 70px;
   height: 40px;
-  background: $white;
+  background: $red;
   display: inline-block;
   position: absolute;
 }
@@ -348,7 +351,7 @@ a {
     position: absolute;
     width: 70px;
     height: 40px;
-    background: $white;
+    background: $red;
     display: inline-block;
     animation: rotate360R 0.5s ease-in-out;
     span {
@@ -360,7 +363,7 @@ a {
       display: inline-block;
       line-height: 40px;
       font-size: 12px;
-      color: #000;
+      color: #fff;
       left: 0;
     }
     &:before {
@@ -417,7 +420,9 @@ a {
       max-height: calc(99% - 40px);
       color: white;
       background-color: #333;
-      border: 0;
+      border: 4px solid #000;
+
+      //border: 0;
       font-family: Verdana, "微软雅黑", "Microsoft YaHei", STXihei, "华文细黑", serif;
       resize: none;
     }
