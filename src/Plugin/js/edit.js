@@ -1,4 +1,4 @@
-import Edit from "./class/edit";
+import Edit from "./class/edit/edit";
 
 const edit=new Edit();
 
