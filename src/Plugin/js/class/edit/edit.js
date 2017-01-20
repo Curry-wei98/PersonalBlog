@@ -73,6 +73,8 @@ export default class Edit {
             let textArea = element.path[0];//获取到对应的input
             //渲染
 
+            textArea.style.height=textArea.value.split("\n").length*21+"px";
+
             if(true==that.pasteFlag){
                 that.pasteFlag=false;
                 return;
@@ -144,7 +146,7 @@ export default class Edit {
     rowController(row, i) {
         if (this.avoidIndex != null && i < this.avoidIndex) {
             return row + "\n";
-        } else if (i == this.avoidIndex) {//todo 业务逻辑没有很好地分离！！！！
+        } else if (i == this.avoidIndex) {//todo 业务逻辑没有分离！！！！
             this.avoidIndex = null;
             return "</code></pre>";
         }
@@ -205,3 +207,6 @@ export default class Edit {
 
 
 }
+
+//todo 这里有首个input 粘贴代码块后第二个 backspace会出错的bug
+//todo  因为Input框挺小的，所以考虑点击以后 focus的问题
