@@ -9,7 +9,7 @@ export default class Edit {
         this.left = document.getElementById('left');//编辑器
         this.right = document.getElementById('right');//显示器
         this.id = 0;
-        this.pasteFlag=false;//todo 用flag不优雅
+        this.pasteFlag = false;//todo 用flag不优雅
     }
 
     //给编辑器绑定一个keydown事件来针对每个相应的textarea
@@ -17,10 +17,8 @@ export default class Edit {
         let that = this;
 
 
-
-
         this.left.addEventListener('paste', function (element) {
-            that.pasteFlag=true;
+            that.pasteFlag = true;
             let items = element.clipboardData.items;
             let textArea = element.path[0];//获取到对应的input
 
@@ -36,6 +34,7 @@ export default class Edit {
                 nextImgRight.id = 'rightImage' + that.id++;
                 nextImgLeft.src = window.URL.createObjectURL(file);
                 nextImgRight.src = window.URL.createObjectURL(file);
+                // nextImgRight.src = 'http://higuaifan.oss-cn-hangzhou.aliyuncs.com/blogImage/' + that.imgUpload(file) + '.jpg';
 
                 that.left.insertBefore(nextImgLeft, textArea.nextElementSibling);
 
@@ -69,14 +68,14 @@ export default class Edit {
             }
 
         });
-        this.left.addEventListener('input',function(element){
+        this.left.addEventListener('input', function (element) {
             let textArea = element.path[0];//获取到对应的input
             //渲染
 
-            textArea.style.height=textArea.value.split("\n").length*21+"px";
+            textArea.style.height = textArea.value.split("\n").length * 21 + "px";
 
-            if(true==that.pasteFlag){
-                that.pasteFlag=false;
+            if (true == that.pasteFlag) {
+                that.pasteFlag = false;
                 return;
             }
             that.render(textArea);
@@ -125,10 +124,7 @@ export default class Edit {
         let showDiv = document.getElementById(name);
 
 
-
-
-
-        showDiv.innerHTML =this.compiler(textArea.value);
+        showDiv.innerHTML = this.compiler(textArea.value);
     }
 
     compiler(str) {
@@ -137,11 +133,10 @@ export default class Edit {
         const that = this;
         this.rows = rows;
         rows.forEach(function (row, i) {
-            newStr += that.rowController(row.replace(/&/g,"&amp").replace(/</g,"&lt;").replace(/>/g,"&gt;"), i);
+            newStr += that.rowController(row.replace(/&/g, "&amp").replace(/</g, "&lt;").replace(/>/g, "&gt;"), i);
         });
         return newStr;
     }
-
 
     rowController(row, i) {
         if (this.avoidIndex != null && i < this.avoidIndex) {
@@ -205,6 +200,28 @@ export default class Edit {
         return row;
     }
 
+
+    imgUpload(img) {
+        let formData = new FormData();
+        let XHR=new XMLHttpRequest();
+        let date=new Date();
+        let time=date.getTime();
+        formData.append('file', img);
+        formData.append('name', time);
+
+        XHR.addEventListener('load',function(data){
+            console.log('success',data);
+        },false);
+        XHR.addEventListener('error',function(data){
+            console.log('error',data);
+        },false);
+        XHR.addEventListener('abort',function (data) {
+            console.log('abort',data);
+        },false);
+        XHR.open('POST','/php/controller/imageUpload.php');
+        XHR.send(formData);
+        return time;
+    }
 
 }
 
