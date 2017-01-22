@@ -33,8 +33,8 @@ export default class Edit {
                 nextImgLeft.setAttribute('data-show', 'rightImage' + that.id);
                 nextImgRight.id = 'rightImage' + that.id++;
                 nextImgLeft.src = window.URL.createObjectURL(file);
-                nextImgRight.src = window.URL.createObjectURL(file);
-                // nextImgRight.src = 'http://higuaifan.oss-cn-hangzhou.aliyuncs.com/blogImage/' + that.imgUpload(file) + '.jpg';
+                // nextImgRight.src = window.URL.createObjectURL(file);
+                nextImgRight.src = 'http://higuaifan.oss-cn-hangzhou.aliyuncs.com/blogImage/' + that.imgUpload(file) + '.jpg';
 
                 that.left.insertBefore(nextImgLeft, textArea.nextElementSibling);
 
