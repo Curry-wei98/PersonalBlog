@@ -61,15 +61,20 @@ let visitor=function(url){
 
 
 notes.addEventListener("click",function(event){
-    tools.removeClass(others,"othersUp");
-    tools.removeClass(middle,"middleUp");
-    tools.addClass(others,"othersDown");
-    tools.addClass(middle,"middleDown");
+    if(!others.classList.contains(('othersDown'))){
+        tools.removeClass(others,"othersUp");
+        tools.removeClass(middle,"middleUp");
+        tools.addClass(others,"othersDown");
+        tools.addClass(middle,"middleDown");
+    }
 });
 
 home.addEventListener("click",function(event){
-    tools.removeClass(others,"othersDown");
-    tools.removeClass(middle,"middleDown");
-    tools.addClass(others,"othersUp");
-    tools.addClass(middle,"middleUp");
+    if(!others.classList.contains(('othersUp'))) {
+        tools.removeClass(others,"othersDown");
+        tools.removeClass(middle,"middleDown");
+        tools.addClass(others,"othersUp");
+        tools.addClass(middle,"middleUp");
+    }
+
 });
