@@ -15,7 +15,10 @@ export default class Edit {
     //给编辑器绑定一个keydown事件来针对每个相应的textarea
     bind() {
         let that = this;
-
+        let button=document.getElementById('button');
+        button.addEventListener('click',function(){
+            console.log(that.right.innerHTML.replace(/ id="[^"]*"/g,''));
+        });
 
         this.left.addEventListener('paste', function (element) {
             that.pasteFlag = true;
@@ -33,9 +36,8 @@ export default class Edit {
                 nextImgLeft.setAttribute('data-show', 'rightImage' + that.id);
                 nextImgRight.id = 'rightImage' + that.id++;
                 nextImgLeft.src = window.URL.createObjectURL(file);
-                // nextImgRight.src = window.URL.createObjectURL(file);
-                nextImgRight.src = 'http://higuaifan.oss-cn-hangzhou.aliyuncs.com/blogImage/' + that.imgUpload(file) + '.jpg';
-
+                nextImgRight.src = window.URL.createObjectURL(file);
+                // nextImgRight.src = 'http://higuaifan.oss-cn-hangzhou.aliyuncs.com/blogImage/' + that.imgUpload(file) + '.jpg';
                 that.left.insertBefore(nextImgLeft, textArea.nextElementSibling);
 
                 //todo 可封装的append

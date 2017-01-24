@@ -10,18 +10,45 @@
     <link rel="stylesheet" href="/Plugin/lib/highlight/styles/agate.css">
     <script src="/Plugin/lib/highlight/highlight.pack.js"></script>
     <style>
-        html,body{
+        html, body {
             background-color: #333;
         }
     </style>
 </head>
 
 <body>
-    <div id="edit">
-        <div id="left"><textarea name="" autofocus title="input area"></textarea></div>
-        <div id="right">
+
+<div id="edit">
+    <div id="toolbar">
+        <div id="button">
+            <span>导出</span>
         </div>
     </div>
+    <div id="left">
+        <textarea name="" autofocus title="input area" style="height: 100%">
+你好，我是一个跳票的编辑器。
+
+支持粘贴富文本。
+支持粘贴图片。
+
+目前支持了md中的：
+#语法
+
+代码块写法如下
+''' js
+console.log('hi');
+'''
+
+过滤了 <>
+不吃换行符
+仅此而已...
+</textarea>
+    </div>
+
+    <div id="right">
+
+    </div>
+</div>
 
 </body>
 </html>
