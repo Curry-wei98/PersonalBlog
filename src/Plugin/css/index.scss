@@ -12,6 +12,7 @@ html, body {
 
   background-color: $white;
   font-family: Verdana, "微软雅黑", "Microsoft YaHei", STXihei, "华文细黑", serif;
+  user-select:none;
 }
 
 textarea, input {
