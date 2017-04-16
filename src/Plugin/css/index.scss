@@ -463,3 +463,19 @@ a {
     }
   }
 }
+
+
+#resume{
+  height: calc(95vh - 76px);
+  overflow-y: auto;
+
+  p{
+    font-size: 16px;
+  }
+  .titles{
+    display: inline-block;
+    width: 50vw;
+    margin: auto;
+    text-align: start;
+  }
+}

@@ -4,8 +4,9 @@ import Route from "./class/route";
 
 let home=document.getElementsByTagName('li')[0];
 let notes=document.getElementsByTagName('li')[1];
-let daily=document.getElementsByTagName('li')[2];
-let edit=document.getElementsByTagName('li')[3];
+// let daily=document.getElementsByTagName('li')[2];
+let edit=document.getElementsByTagName('li')[2];
+let resume=document.getElementsByTagName('li')[4];
 let middle=document.getElementById('middle');
 let others=document.getElementById('others');
 
@@ -15,10 +16,11 @@ let others=document.getElementById('others');
 let tools=new Tools(middle);
 let route=new Route();
 tools.hover(notes,"notes");
-tools.hover(daily,"daily");
+// tools.hover(daily,"daily");
 tools.hover(edit,"edit");
 // tools.homeClick(home);
 tools.load(notes, "others", "Tags/notes.html");
+tools.load(resume, "others", "Tags/resume.html");
 // tools.changeClick(daily, "tags", "Tags/notes.html");
 
 
@@ -68,6 +70,18 @@ notes.addEventListener("click",function(event){
         tools.addClass(middle,"middleDown");
     }
 });
+
+resume.addEventListener("click",function(event){
+    if(!others.classList.contains(('othersDown'))){
+        tools.removeClass(others,"othersUp");
+        tools.removeClass(middle,"middleUp");
+        tools.addClass(others,"othersDown");
+        tools.addClass(middle,"middleDown");
+    }
+});
+
+resume.click();
+
 
 home.addEventListener("click",function(event){
     if(!others.classList.contains(('othersUp'))) {
