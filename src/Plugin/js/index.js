@@ -78,3 +78,9 @@ home.addEventListener("click",function(event){
     }
 
 });
+
+
+document.addEventListener("webkitvisibilitychange", function(){
+    let title=document.getElementsByTagName('title')[0];
+    event.target.webkitHidden?title.innerHTML="嘿，就这么走了吗": title.innerHTML="你好怪凡";
+});

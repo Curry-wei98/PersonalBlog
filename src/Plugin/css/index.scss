@@ -3,13 +3,17 @@ $white: #fff;
 $red: #a82533;
 $lightRed: #BF2435;
 
+a:hover{
+  cursor:url('/cursor/pointer.cur'),pointer;
+}
+
 html, body {
   border: 0;
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
-
+  cursor:url('/cursor/cursor.cur'),auto;
   background-color: $white;
   font-family: Verdana, "微软雅黑", "Microsoft YaHei", STXihei, "华文细黑", serif;
   user-select:none;
@@ -49,7 +53,8 @@ a {
     padding: 0 20px;
     &:hover {
       background-color: $lightRed;
-      cursor: pointer;
+      cursor:url('/cursor/pointer.cur'),pointer;
+
     }
   }
 }
@@ -338,7 +343,7 @@ a {
   span {
     margin: auto;
     &:hover {
-      cursor: pointer;
+      cursor:url('/cursor/pointer.cur'),pointer;
     }
   }
 }
@@ -385,7 +390,8 @@ a {
       transform: rotate(-60deg);
     }
     &:hover {
-      cursor: pointer;
+      cursor:url('/cursor/pointer.cur'),pointer;
+
       transform: rotate(0deg);
       animation: rotate360 0.5s ease-in-out;
       &:before {
@@ -404,7 +410,8 @@ a {
     span {
       display: block;
       &:hover {
-        cursor: pointer;
+        cursor:url('/cursor/pointer.cur'),pointer;
+
       }
     }
   }
@@ -451,7 +458,7 @@ a {
       background-color: rgb(41, 41, 41);
       color: #fff;
       &:hover {
-        cursor: pointer;
+        cursor:url('/cursor/pointer.cur'),pointer; 
       }
     }
   }
