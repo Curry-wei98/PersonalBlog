@@ -80,7 +80,6 @@ resume.addEventListener("click",function(event){
     }
 });
 
-resume.click();
 
 
 home.addEventListener("click",function(event){
