@@ -479,3 +479,7 @@ a {
     text-align: start;
   }
 }
+
+#resume::-webkit-scrollbar {
+  width: 0;
+}
