@@ -12,12 +12,15 @@ $bucket = Common::getBucketName();
 $ossClient = Common::getOssClient();
 
 $imageName = $_POST['name'];
+$key = $_POST['key'];
 $return = array();
 $return["msg"] = 'error';
 $ossClient->setTimeout(3600);
 $ossClient->setConnectTimeout(10);
 
-
+if($key!="HiguaifanOSSkey"){
+  return $return;
+}
 
 try {
     if ($_FILES["file"]["error"] > 0) {
@@ -47,5 +50,3 @@ function uploadFiles($ossClient, $bucket,$imageName)
     }
     return true;
 }
-
-?>
