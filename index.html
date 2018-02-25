@@ -6,72 +6,21 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>你好怪凡</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            border: 0;
-            user-select: none;
-        }
-
-        #main {
-            width: 100vw;
-            height: 100vh;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        #higuaifan {
-            font-size: 12em;
-        }
-
-        #hi, #guaifan {
-            display: inline-block;
-        }
-
-        #hi:hover, #guaifan:hover {
-            color: red;
-            cursor: pointer;
-        }
-
-        #print {
-            font-size: 0.2em;
-            display: block;
-        }
-
-        #links {
-            font-size: 0.2em;
-            display: none;
-            height: 0;
-        }
-
-        a {
-            color: black;
-            text-decoration: none;
-        }
-
-        #links a:hover {
-            color: red;
-            cursor: pointer;
-        }
-
-
-    </style>
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
 
 
 <div id="main">
-    <div id="higuaifan">
-        <span id="hi">Hi</span><span id="guaifan">Guaifan</span>
-
-        <div id="print">一个梦想混吃等死的人。</div>
-
-        <div id="links">
-            <a href="https://github.com/higuaifan/notes" target="view_window">学习笔记</a>
-            <a href="https://github.com/higuaifan" target="view_window">github</a>
+    <div id="screen">
+        <div class="screen" id="higuaifanX1">
+            hi
+        </div>
+        <div class="screen" id="higuaifanX2">
+            hi bro!
+        </div>
+        <div class="screen" id="higuaifanX3">
+            hello bro!
         </div>
     </div>
 </div>
@@ -79,38 +28,4 @@
 
 </body>
 </html>
-
-
-<script>
-
-
-    var hi = document.getElementById("hi");
-    var guaifan = document.getElementById("guaifan");
-    var print = document.getElementById("print");
-    var links = document.getElementById("links");
-
-    var flag = false;
-    hi.addEventListener("click", function (event) {
-
-        if (flag) {
-            print.innerHTML = "一个梦想混吃等死的人。";
-            flag = false;
-        } else {
-            print.innerHTML = "你好呀，是不是想视奸我？简历的页面还没写奥。";
-            flag = true;
-        }
-
-    });
-
-    var flag4Guaifan = false;
-    guaifan.addEventListener("click", function (event) {
-        if (flag4Guaifan) {
-            links.style.display = "none";
-            flag4Guaifan = false;
-        } else {
-            links.style.display = "block";
-            flag4Guaifan = true;
-        }
-    })
-
-</script>
+<script src="js/index.js"></script>
