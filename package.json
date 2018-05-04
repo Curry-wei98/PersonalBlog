@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/higuaifan/PersonalBlog/issues"
   },
-  "homepage": "https://github.com/higuaifan/PersonalBlog#readme"
+  "homepage": "https://github.com/higuaifan/PersonalBlog#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
 }

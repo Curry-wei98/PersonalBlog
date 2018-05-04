@@ -7,14 +7,22 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>你好怪凡</title>
     <style>
+        ::-webkit-scrollbar{
+            display:none;
+        }
         body {
             margin: 0;
             padding: 0;
             border: 0;
+            height: 100vh
             user-select: none;
         }
 
-        #main {
+        body > div {
+            position: relative;
+        }
+
+        #main,#show {
             width: 100vw;
             height: 100vh;
             text-align: center;
@@ -22,6 +30,8 @@
             flex-direction: column;
             justify-content: center;
         }
+
+
 
         #higuaifan {
             font-size: 12em;
@@ -57,22 +67,51 @@
             cursor: pointer;
         }
 
+        .blog{
+            top: -100vh;
+            animation: blog 0.5s forwards;
+        }
+
+        @keyframes blog {
+            0% {
+                top: 0;
+            }
+            100% {
+                top: -100vh !important;
+            }
+        }
+
+        .index{
+            top: 0;
+            animation: index 0.5s forwards;
+        }
+
+        @keyframes index {
+            0% {
+                top: -100vh;
+            }
+            100% {
+                top: 0 !important;
+            }
+        }
 
     </style>
 </head>
 <body>
 
 
-<div id="main">
-    <div id="higuaifan">
-        <span id="hi">Hi</span><span id="guaifan">Guaifan</span>
+<div id="divs">
+    <div id="main">
+        <div id="higuaifan">
+            <span id="hi">Hi</span><span id="guaifan">Guaifan</span>
 
-        <div id="print">一个梦想混吃等死的人。</div>
+            <div id="print">一个梦想混吃等死的人。</div>
 
-        <div id="links">
-            <a href="https://github.com/higuaifan/notes" target="view_window">学习笔记</a>
-            <a href="https://github.com/higuaifan" target="view_window">github</a>
         </div>
+    </div>
+
+    <div id="show">
+
     </div>
 </div>
 
@@ -82,35 +121,50 @@
 
 
 <script>
+	document.documentElement.scrollTop=0;
+
+	let hi = document.getElementById("hi");
+	let guaifan = document.getElementById("guaifan");
+	let show = document.getElementById("show");
+	let main = document.getElementById("main");
+	let divs = document.getElementById("divs");
 
 
-    var hi = document.getElementById("hi");
-    var guaifan = document.getElementById("guaifan");
-    var print = document.getElementById("print");
-    var links = document.getElementById("links");
+	let flag = false;
 
-    var flag = false;
-    hi.addEventListener("click", function (event) {
+	fetch("/blog").then(function (response) {
+		response.text().then(function (html) {
+			show.innerHTML=html;
+		})
+	})
 
-        if (flag) {
-            print.innerHTML = "一个梦想混吃等死的人。";
-            flag = false;
-        } else {
-            print.innerHTML = "你好呀，是不是想视奸我？简历的页面还没写奥。";
-            flag = true;
+	function loadBlog(){
+		divs.classList.add('blog');
+		divs.classList.remove('index');
+		document.body.style.height="100vh";
+	}
+	function loadIndex(){
+		divs.classList.add('index');
+		divs.classList.remove('blog');
+		document.body.style.height="100vh";
+	}
+
+	hi.addEventListener("click", function (event) {
+		loadBlog();
+	});
+
+
+
+	let flag4Guaifan = false;
+	guaifan.addEventListener("click", function (event) {
+
+	})
+    window.onmousewheel=function(e) {
+		if(e.deltaY>0){
+			loadBlog();
+        }else{
+			loadIndex();
         }
-
-    });
-
-    var flag4Guaifan = false;
-    guaifan.addEventListener("click", function (event) {
-        if (flag4Guaifan) {
-            links.style.display = "none";
-            flag4Guaifan = false;
-        } else {
-            links.style.display = "block";
-            flag4Guaifan = true;
-        }
-    })
+    };;
 
 </script>
