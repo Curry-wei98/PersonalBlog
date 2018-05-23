@@ -28,13 +28,23 @@
             text-align: center;
             display: flex;
             flex-direction: column;
-            justify-content: center;
         }
 
+
+        #main{
+            background-color:rgb(33,36,45);
+            justify-content: center;
+
+        }
+        #show{
+            background-color:rgb(231,187,204);
+            justify-content: start;
+        }
 
 
         #higuaifan {
             font-size: 12em;
+            color:rgb(212,211,207);
         }
 
         #hi, #guaifan {
@@ -42,7 +52,7 @@
         }
 
         #hi:hover, #guaifan:hover {
-            color: red;
+            color: rgb(167, 34, 21);
             cursor: pointer;
         }
 
@@ -63,16 +73,16 @@
         }
 
         #links a:hover {
-            color: red;
+            color: rgb(167, 34, 21);
             cursor: pointer;
         }
 
-        .blog{
+        .resume{
             top: -100vh;
-            animation: blog 0.5s forwards;
+            animation: resume 0.5s forwards;
         }
 
-        @keyframes blog {
+        @keyframes resume {
             0% {
                 top: 0;
             }
@@ -93,6 +103,9 @@
             100% {
                 top: 0 !important;
             }
+        }
+        #divs>div{
+            overflow-y: auto;
         }
 
     </style>
@@ -132,25 +145,25 @@
 
 	let flag = false;
 
-	fetch("/blog").then(function (response) {
+	fetch("/resume").then(function (response) {
 		response.text().then(function (html) {
 			show.innerHTML=html;
 		})
-	})
+	});
 
-	function loadBlog(){
-		divs.classList.add('blog');
+	function loadResume(){
+		divs.classList.add('resume');
 		divs.classList.remove('index');
 		document.body.style.height="100vh";
 	}
 	function loadIndex(){
 		divs.classList.add('index');
-		divs.classList.remove('blog');
+		divs.classList.remove('resume');
 		document.body.style.height="100vh";
 	}
 
 	hi.addEventListener("click", function (event) {
-		loadBlog();
+		loadResume();
 	});
 
 
@@ -158,13 +171,17 @@
 	let flag4Guaifan = false;
 	guaifan.addEventListener("click", function (event) {
 
-	})
+	});
     window.onmousewheel=function(e) {
+    	// console.log(e);
 		if(e.deltaY>0){
-			loadBlog();
+			loadResume();
         }else{
-			loadIndex();
+            if(show.scrollTop===0){
+	            loadIndex();
+            }
+
         }
-    };;
+    };
 
 </script>
