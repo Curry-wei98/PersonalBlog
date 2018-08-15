@@ -6,12 +6,19 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>你好怪凡</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <style>
+        a:hover{
+            cursor:url('/pointer.cur'),pointer;
+        }
+
         ::-webkit-scrollbar {
             display: none;
         }
 
         body {
+            cursor:url('/cursor.cur'),auto;
             margin: 0;
             padding: 0;
             border: 0;
@@ -53,7 +60,7 @@
 
         #hi:hover, #guaifan:hover {
             color: rgb(167, 34, 21);
-            cursor: pointer;
+            cursor:url('/pointer.cur'),pointer;
         }
 
         #print {
