@@ -7,14 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>你好怪凡</title>
     <style>
-        ::-webkit-scrollbar{
-            display:none;
+        ::-webkit-scrollbar {
+            display: none;
         }
+
         body {
             margin: 0;
             padding: 0;
             border: 0;
-            height: 100vh
+            height: 100vh;
             user-select: none;
         }
 
@@ -22,7 +23,7 @@
             position: relative;
         }
 
-        #main,#show {
+        #main, #resume, #links {
             width: 100vw;
             height: 100vh;
             text-align: center;
@@ -30,21 +31,20 @@
             flex-direction: column;
         }
 
-
-        #main{
-            background-color:rgb(33,36,45);
+        #main {
+            background-color: rgb(33, 36, 45);
             justify-content: center;
 
         }
-        #show{
-            background-color:rgb(231,187,204);
+
+        #resume {
+            background-color: rgb(231, 187, 204);
             justify-content: start;
         }
 
-
         #higuaifan {
             font-size: 12em;
-            color:rgb(212,211,207);
+            color: rgb(212, 211, 207);
         }
 
         #hi, #guaifan {
@@ -61,58 +61,91 @@
             display: block;
         }
 
-        #links {
-            font-size: 0.2em;
-            display: none;
-            height: 0;
-        }
-
         a {
             color: black;
             text-decoration: none;
         }
 
-        #links a:hover {
-            color: rgb(167, 34, 21);
-            cursor: pointer;
+        .top2links {
+            top: -200vh;
+            animation: top2links 0.5s forwards;
         }
 
-        .resume{
+        .top2resume {
             top: -100vh;
-            animation: resume 0.5s forwards;
+            animation: top2resume 0.5s forwards;
         }
 
-        @keyframes resume {
+        .resume2top {
+            top: 0;
+            animation: resume2top 0.5s forwards;
+        }
+
+        .links2resume {
+            top: -100vh;
+            animation: links2resume 0.5s forwards;
+        }
+
+        .resume2links {
+            top: -200vh;
+            animation: resume2links 0.5s forwards;
+        }
+
+        @keyframes top2links {
             0% {
                 top: 0;
             }
             100% {
-                top: -100vh !important;
+                top: -200vh;
             }
         }
 
-        .index{
-            top: 0;
-            animation: index 0.5s forwards;
+        @keyframes top2resume {
+            0% {
+                top: 0;
+            }
+            100% {
+                top: -100vh;
+            }
         }
 
-        @keyframes index {
+        @keyframes resume2top {
             0% {
                 top: -100vh;
             }
             100% {
-                top: 0 !important;
+                top: 0;
             }
         }
-        #divs>div{
+
+        @keyframes resume2links {
+            0% {
+                top: -100vh;
+            }
+            100% {
+                top: -200vh;
+            }
+        }
+
+        @keyframes links2resume {
+            0% {
+                top: -200vh;
+            }
+            100% {
+                top: -100vh;
+            }
+        }
+
+        #divs > div {
             overflow-y: auto;
         }
 
+        #resume {
+            color: #585858;
+        }
     </style>
 </head>
 <body>
-
-
 <div id="divs">
     <div id="main">
         <div id="higuaifan">
@@ -123,65 +156,151 @@
         </div>
     </div>
 
-    <div id="show">
+    <div id="resume">
+
+    </div>
+
+    <div id="links">
 
     </div>
 </div>
-
-
 </body>
 </html>
 
 
 <script>
-	document.documentElement.scrollTop=0;
+	document.documentElement.scrollTop = 0;
 
-	let hi = document.getElementById("hi");
-	let guaifan = document.getElementById("guaifan");
-	let show = document.getElementById("show");
-	let main = document.getElementById("main");
-	let divs = document.getElementById("divs");
-
-
-	let flag = false;
+	let hi = document.getElementById("hi"),
+		guaifan = document.getElementById("guaifan"),
+		resume = document.getElementById("resume"),
+		resumeBody = undefined,
+		links = document.getElementById("links"),
+		divs = document.getElementById("divs"),
+		flag = false,
+		view = 0;
 
 	fetch("/resume").then(function (response) {
 		response.text().then(function (html) {
-			show.innerHTML=html;
+			resume.innerHTML = html;
+			resumeBody = document.getElementById("resume-main");
+		})
+	});
+	fetch("/links").then(function (response) {
+		response.text().then(function (html) {
+			links.innerHTML = html;
 		})
 	});
 
-	function loadResume(){
-		divs.classList.add('resume');
-		divs.classList.remove('index');
-		document.body.style.height="100vh";
+	function top2links() {
+		view = 2;
+		divs.classList.add('top2links');
+		divs.classList.remove('resume2top');
+		document.body.style.height = "100vh";
 	}
-	function loadIndex(){
-		divs.classList.add('index');
-		divs.classList.remove('resume');
-		document.body.style.height="100vh";
+
+
+	function top2resume() {
+		view = 1;
+		divs.classList.add('top2resume');
+		divs.classList.remove('resume2top');
+		document.body.style.height = "100vh";
 	}
+
+	function resume2top() {
+		view = 0;
+		divs.classList.add('resume2top');
+		divs.classList.remove('links2resume');
+		divs.classList.remove('top2resume');
+		document.body.style.height = "100vh";
+	}
+
+	function resume2links() {
+		view = 2;
+		divs.classList.add('resume2links');
+		divs.classList.remove('links2resume');
+		divs.classList.remove('top2resume');
+		document.body.style.height = "100vh";
+	}
+
+	function links2resume() {
+		view = 1;
+		divs.classList.add('links2resume');
+		divs.classList.remove('resume2links');
+		divs.classList.remove('top2links');
+		document.body.style.height = "100vh";
+	}
+
 
 	hi.addEventListener("click", function (event) {
-		loadResume();
+		top2resume();
 	});
 
-
-
-	let flag4Guaifan = false;
 	guaifan.addEventListener("click", function (event) {
-
+		top2links();
 	});
-    window.onmousewheel=function(e) {
-    	// console.log(e);
-		if(e.deltaY>0){
-			loadResume();
-        }else{
-            if(show.scrollTop===0){
-	            loadIndex();
-            }
 
+	document.onmousewheel = function () {
+		return false;
+	};
+	let delay = 0;
+	function resumeDown(){
+		if(delay<0){
+			return;
         }
-    };
+        resume.scrollTop++;
+		delay--;
+		setTimeout("resumeDown()",3);
+    }
+
+	function resumeUp(){
+		if(delay>0){
+			return;
+		}
+		resume.scrollTop--;
+		delay++;
+		setTimeout("resumeUp()",3);
+	}
+
+    let count=0;
+	window.onmousewheel = function (e) {
+		if (e.deltaY > 0) {
+			if (view === 0) {
+				top2resume();
+				count=0;
+				return false;
+			} else if (view === 1) {
+				if (resumeBody.offsetHeight <= resume.scrollTop + resume.offsetHeight) {
+					resume2links();
+					return false;
+				} else {
+					if(count>1){
+						delay = e.deltaY;
+						setTimeout("resumeDown()",3);
+                    }
+					count++;
+				}
+			}
+		} else {
+			if (view === 2) {
+				links2resume();
+				count=0;
+				return false
+			} else if (view === 1) {
+				if (resume.scrollTop === 0) {
+					resume2top();
+					count=0;
+					return false;
+				} else {
+					if(count>1){
+						delay = e.deltaY;
+						setTimeout("resumeUp()",3);
+					}
+					count++;
+				}
+			}
+
+		}
+	};
 
 </script>

@@ -1,0 +1,90 @@
+::-webkit-scrollbar{
+  display:none;
+}
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  height: 100vh
+  user-select: none;
+}
+
+body > div {
+  position: relative;
+}
+
+#main,#show {
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#main{
+  background-color:rgb(144,147,152);
+}
+
+
+#higuaifan {
+  font-size: 12em;
+}
+
+#hi, #guaifan {
+  display: inline-block;
+}
+
+#hi:hover, #guaifan:hover {
+  color: red;
+  cursor: pointer;
+}
+
+#print {
+  font-size: 0.2em;
+  display: block;
+}
+
+#links {
+  font-size: 0.2em;
+  display: none;
+  height: 0;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+#links a:hover {
+  color: rgb(130,29,19);
+  cursor: pointer;
+}
+
+.blog{
+  top: -100vh;
+  animation: blog 0.5s forwards;
+}
+
+@keyframes blog {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: -100vh !important;
+  }
+}
+
+.index{
+  top: 0;
+  animation: index 0.5s forwards;
+}
+
+@keyframes index {
+  0% {
+    top: -100vh;
+  }
+  100% {
+    top: 0 !important;
+  }
+}
