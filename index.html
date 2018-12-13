@@ -6,11 +6,11 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>你好怪凡</title>
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
     <style>
-        a:hover{
-            cursor:url('/pointer.cur'),pointer;
+        a:hover {
+            cursor: url('/pointer.cur'), pointer;
         }
 
         ::-webkit-scrollbar {
@@ -18,7 +18,7 @@
         }
 
         body {
-            cursor:url('/cursor.cur'),auto;
+            cursor: url('/cursor.cur'), auto;
             margin: 0;
             padding: 0;
             border: 0;
@@ -60,7 +60,7 @@
 
         #hi:hover, #guaifan:hover {
             color: rgb(167, 34, 21);
-            cursor:url('/pointer.cur'),pointer;
+            cursor: url('/pointer.cur'), pointer;
         }
 
         #print {
@@ -150,6 +150,10 @@
         #resume {
             color: #585858;
         }
+
+        #links {
+            background-color: #e2c027;
+        }
     </style>
 </head>
 <body>
@@ -176,138 +180,139 @@
 
 
 <script>
-	document.documentElement.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
 
-	let hi = document.getElementById("hi"),
-		guaifan = document.getElementById("guaifan"),
-		resume = document.getElementById("resume"),
-		resumeBody = undefined,
-		links = document.getElementById("links"),
-		divs = document.getElementById("divs"),
-		flag = false,
-		view = 0;
+    let hi = document.getElementById("hi"),
+        guaifan = document.getElementById("guaifan"),
+        resume = document.getElementById("resume"),
+        resumeBody = undefined,
+        links = document.getElementById("links"),
+        divs = document.getElementById("divs"),
+        flag = false,
+        view = 0;
 
-	fetch("/resume").then(function (response) {
-		response.text().then(function (html) {
-			resume.innerHTML = html;
-			resumeBody = document.getElementById("resume-main");
-		})
-	});
-	fetch("/links").then(function (response) {
-		response.text().then(function (html) {
-			links.innerHTML = html;
-		})
-	});
+    fetch("/resume").then(function (response) {
+        response.text().then(function (html) {
+            resume.innerHTML = html;
+            resumeBody = document.getElementById("resume-main");
+        })
+    });
+    fetch("/links").then(function (response) {
+        response.text().then(function (html) {
+            links.innerHTML = html;
+        })
+    });
 
-	function top2links() {
-		view = 2;
-		divs.classList.add('top2links');
-		divs.classList.remove('resume2top');
-		document.body.style.height = "100vh";
-	}
-
-
-	function top2resume() {
-		view = 1;
-		divs.classList.add('top2resume');
-		divs.classList.remove('resume2top');
-		document.body.style.height = "100vh";
-	}
-
-	function resume2top() {
-		view = 0;
-		divs.classList.add('resume2top');
-		divs.classList.remove('links2resume');
-		divs.classList.remove('top2resume');
-		document.body.style.height = "100vh";
-	}
-
-	function resume2links() {
-		view = 2;
-		divs.classList.add('resume2links');
-		divs.classList.remove('links2resume');
-		divs.classList.remove('top2resume');
-		document.body.style.height = "100vh";
-	}
-
-	function links2resume() {
-		view = 1;
-		divs.classList.add('links2resume');
-		divs.classList.remove('resume2links');
-		divs.classList.remove('top2links');
-		document.body.style.height = "100vh";
-	}
-
-
-	hi.addEventListener("click", function (event) {
-		top2resume();
-	});
-
-	guaifan.addEventListener("click", function (event) {
-		top2links();
-	});
-
-	document.onmousewheel = function () {
-		return false;
-	};
-	let delay = 0;
-	function resumeDown(){
-		if(delay<0){
-			return;
-        }
-        resume.scrollTop++;
-		delay--;
-		setTimeout("resumeDown()",3);
+    function top2links() {
+        view = 2;
+        divs.classList.add('top2links');
+        divs.classList.remove('resume2top');
+        document.body.style.height = "100vh";
     }
 
-	function resumeUp(){
-		if(delay>0){
-			return;
-		}
-		resume.scrollTop--;
-		delay++;
-		setTimeout("resumeUp()",3);
-	}
 
-    let count=0;
-	window.onmousewheel = function (e) {
-		if (e.deltaY > 0) {
-			if (view === 0) {
-				top2resume();
-				count=0;
-				return false;
-			} else if (view === 1) {
-				if (resumeBody.offsetHeight <= resume.scrollTop + resume.offsetHeight) {
-					resume2links();
-					return false;
-				} else {
-					if(count>1){
-						delay = e.deltaY;
-						setTimeout("resumeDown()",3);
+    function top2resume() {
+        view = 1;
+        divs.classList.add('top2resume');
+        divs.classList.remove('resume2top');
+        document.body.style.height = "100vh";
+    }
+
+    function resume2top() {
+        view = 0;
+        divs.classList.add('resume2top');
+        divs.classList.remove('links2resume');
+        divs.classList.remove('top2resume');
+        document.body.style.height = "100vh";
+    }
+
+    function resume2links() {
+        view = 2;
+        divs.classList.add('resume2links');
+        divs.classList.remove('links2resume');
+        divs.classList.remove('top2resume');
+        document.body.style.height = "100vh";
+    }
+
+    function links2resume() {
+        view = 1;
+        divs.classList.add('links2resume');
+        divs.classList.remove('resume2links');
+        divs.classList.remove('top2links');
+        document.body.style.height = "100vh";
+    }
+
+
+    hi.addEventListener("click", function (event) {
+        top2resume();
+    });
+
+    guaifan.addEventListener("click", function (event) {
+        top2links();
+    });
+
+    document.onmousewheel = function () {
+        return false;
+    };
+    let delay = 0;
+
+    function resumeDown() {
+        if (delay < 0) {
+            return;
+        }
+        resume.scrollTop++;
+        delay--;
+        setTimeout("resumeDown()", 3);
+    }
+
+    function resumeUp() {
+        if (delay > 0) {
+            return;
+        }
+        resume.scrollTop--;
+        delay++;
+        setTimeout("resumeUp()", 3);
+    }
+
+    let count = 0;
+    window.onmousewheel = function (e) {
+        if (e.deltaY > 0) {
+            if (view === 0) {
+                top2resume();
+                count = 0;
+                return false;
+            } else if (view === 1) {
+                if (resumeBody.offsetHeight <= resume.scrollTop + resume.offsetHeight) {
+                    resume2links();
+                    return false;
+                } else {
+                    if (count > 1) {
+                        delay = e.deltaY;
+                        setTimeout("resumeDown()", 3);
                     }
-					count++;
-				}
-			}
-		} else {
-			if (view === 2) {
-				links2resume();
-				count=0;
-				return false
-			} else if (view === 1) {
-				if (resume.scrollTop === 0) {
-					resume2top();
-					count=0;
-					return false;
-				} else {
-					if(count>1){
-						delay = e.deltaY;
-						setTimeout("resumeUp()",3);
-					}
-					count++;
-				}
-			}
+                    count++;
+                }
+            }
+        } else {
+            if (view === 2) {
+                links2resume();
+                count = 0;
+                return false
+            } else if (view === 1) {
+                if (resume.scrollTop === 0) {
+                    resume2top();
+                    count = 0;
+                    return false;
+                } else {
+                    if (count > 1) {
+                        delay = e.deltaY;
+                        setTimeout("resumeUp()", 3);
+                    }
+                    count++;
+                }
+            }
 
-		}
-	};
+        }
+    };
 
 </script>
