@@ -315,4 +315,8 @@
         }
     };
 
+    document.addEventListener("webkitvisibilitychange", function (e) {
+            document.title = e.target.webkitHidden?'嘿,你去哪?':'你好怪凡';
+    }, false);
+
 </script>
