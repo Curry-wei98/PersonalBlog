@@ -6,6 +6,4 @@ WORKDIR /home/higuaifan
 
 EXPOSE 8923
 
-CMD cnpm install
-
-CMD node ./service/index.js
+CMD cnpm install && node ./service/index.js
