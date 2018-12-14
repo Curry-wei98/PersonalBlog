@@ -6,4 +6,4 @@ WORKDIR /home/higuaifan
 
 EXPOSE 8923
 
-CMD node service/index
+CMD npm install && node service/index
